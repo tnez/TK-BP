@@ -1,0 +1,12 @@
+# last mod 20100803 (tn)
+
+# xcode noise
+build/*
+BP.xcodeproj/*
+# but include the project file
+!BP.xcodeproj/project.pbxproj
+
+# osx noise
+.DS_Store
+profile
+
