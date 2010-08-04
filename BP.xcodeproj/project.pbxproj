@@ -17,6 +17,9 @@
 		401D7AE01209F657006F618F /* AMStandardEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 401D7AD91209F657006F618F /* AMStandardEnumerator.m */; };
 		401D7AE11209F657006F618F /* BSD License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 401D7ADA1209F657006F618F /* BSD License.txt */; };
 		401D7AEA1209F6B0006F618F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401D7AE91209F6B0006F618F /* IOKit.framework */; };
+		40949628120A002100301695 /* preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40949627120A002100301695 /* preferences.plist */; };
+		40949631120A019B00301695 /* BPPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40949630120A019B00301695 /* BPPreferencesController.m */; };
+		40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -47,6 +50,10 @@
 		401D7AD91209F657006F618F /* AMStandardEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMStandardEnumerator.m; path = "AMSerial (Andreas Mayer)/AMStandardEnumerator.m"; sourceTree = "<group>"; };
 		401D7ADA1209F657006F618F /* BSD License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "BSD License.txt"; path = "AMSerial (Andreas Mayer)/BSD License.txt"; sourceTree = "<group>"; };
 		401D7AE91209F6B0006F618F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		40949627120A002100301695 /* preferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preferences.plist; sourceTree = "<group>"; };
+		4094962F120A019B00301695 /* BPPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesController.h; sourceTree = "<group>"; };
+		40949630120A019B00301695 /* BPPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesController.m; sourceTree = "<group>"; };
+		40F2119D1209F8B400CA2C78 /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = ../TKUtility/build/Release/TKUtility.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -58,6 +65,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				401D7AEA1209F6B0006F618F /* IOKit.framework in Frameworks */,
+				40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +75,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4094962F120A019B00301695 /* BPPreferencesController.h */,
+				40949630120A019B00301695 /* BPPreferencesController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -85,6 +95,7 @@
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				401D7AE91209F6B0006F618F /* IOKit.framework */,
+				40F2119D1209F8B400CA2C78 /* TKUtility.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -105,7 +116,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				400E63A91208B6930070AACD /* preferences.xib */,
 			);
 			name = BP;
 			sourceTree = "<group>";
@@ -126,6 +136,8 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				400E63A91208B6930070AACD /* preferences.xib */,
+				40949627120A002100301695 /* preferences.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -208,6 +220,7 @@
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				400E63AA1208B6930070AACD /* preferences.xib in Resources */,
 				401D7AE11209F657006F618F /* BSD License.txt in Resources */,
+				40949628120A002100301695 /* preferences.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +238,7 @@
 				401D7ADE1209F657006F618F /* AMSerialPortList.m in Sources */,
 				401D7ADF1209F657006F618F /* AMSerialPortList_Deprecated.m in Sources */,
 				401D7AE01209F657006F618F /* AMStandardEnumerator.m in Sources */,
+				40949631120A019B00301695 /* BPPreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +269,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../TKUtility/build/Release\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -272,6 +290,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../TKUtility/build/Release\"",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BP_Prefix.pch;
