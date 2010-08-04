@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>taskName</key>
+	<string>BP</string>
+	<key>dataFileName</key>
+	<string>BP.data</string>
+	<key>dataDirectory</key>
+	<string></string>
+	<key>bpSerialPortName</key>
+	<string>/dev/cu.usbserial-A600b3gB</string>
+	<key>bpShouldRecordSystolic</key>
+	<true/>
+	<key>bpShouldRecordDiastolic</key>
+	<true/>
+	<key>bpShouldRecordHeartRate</key>
+	<true/>
+</dict>
+</plist>
