@@ -8,5 +8,6 @@ BP.xcodeproj/*
 
 # osx noise
 .DS_Store
+._*
 profile
 
