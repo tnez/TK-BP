@@ -19,6 +19,8 @@
 		401D7AEA1209F6B0006F618F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401D7AE91209F6B0006F618F /* IOKit.framework */; };
 		40949628120A002100301695 /* preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40949627120A002100301695 /* preferences.plist */; };
 		40949631120A019B00301695 /* BPPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40949630120A019B00301695 /* BPPreferencesController.m */; };
+		40A07834120B084D0012A3ED /* BPAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A07833120B084D0012A3ED /* BPAppController.m */; };
+		40A07880120B375E0012A3ED /* TKDinamapBPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A0787F120B375E0012A3ED /* TKDinamapBPController.m */; };
 		40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -53,6 +55,10 @@
 		40949627120A002100301695 /* preferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preferences.plist; sourceTree = "<group>"; };
 		4094962F120A019B00301695 /* BPPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesController.h; sourceTree = "<group>"; };
 		40949630120A019B00301695 /* BPPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesController.m; sourceTree = "<group>"; };
+		40A07832120B084D0012A3ED /* BPAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPAppController.h; sourceTree = "<group>"; };
+		40A07833120B084D0012A3ED /* BPAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPAppController.m; sourceTree = "<group>"; };
+		40A0787E120B375E0012A3ED /* TKDinamapBPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDinamapBPController.h; sourceTree = "<group>"; };
+		40A0787F120B375E0012A3ED /* TKDinamapBPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDinamapBPController.m; sourceTree = "<group>"; };
 		40F2119D1209F8B400CA2C78 /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = ../TKUtility/build/Release/TKUtility.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +83,10 @@
 			children = (
 				4094962F120A019B00301695 /* BPPreferencesController.h */,
 				40949630120A019B00301695 /* BPPreferencesController.m */,
+				40A07832120B084D0012A3ED /* BPAppController.h */,
+				40A07833120B084D0012A3ED /* BPAppController.m */,
+				40A0787E120B375E0012A3ED /* TKDinamapBPController.h */,
+				40A0787F120B375E0012A3ED /* TKDinamapBPController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -239,6 +249,8 @@
 				401D7ADF1209F657006F618F /* AMSerialPortList_Deprecated.m in Sources */,
 				401D7AE01209F657006F618F /* AMStandardEnumerator.m in Sources */,
 				40949631120A019B00301695 /* BPPreferencesController.m in Sources */,
+				40A07834120B084D0012A3ED /* BPAppController.m in Sources */,
+				40A07880120B375E0012A3ED /* TKDinamapBPController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
