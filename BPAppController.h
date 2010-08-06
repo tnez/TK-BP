@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <TKUtility/TKUtility.h>
-@class TKDinamapBPController;
-
+#import "TKDinamapBPController.h"
 
 #define BP_PORT [[TKPreferences defaultPrefs] valueForKey:@"bpSerialPortName"]
 #define BP_WINDOW_NIB_FILE @"BPWindow"

@@ -21,11 +21,26 @@
 		40949631120A019B00301695 /* BPPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40949630120A019B00301695 /* BPPreferencesController.m */; };
 		40A07834120B084D0012A3ED /* BPAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A07833120B084D0012A3ED /* BPAppController.m */; };
 		40A07880120B375E0012A3ED /* TKDinamapBPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A0787F120B375E0012A3ED /* TKDinamapBPController.m */; };
+		40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A1ED7D120CA515006A1869 /* BPWindowController.m */; };
+		40A1EE12120CB61B006A1869 /* TKUtility.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		40A1EE0E120CB60D006A1869 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				40A1EE12120CB61B006A1869 /* TKUtility.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -59,6 +74,8 @@
 		40A07833120B084D0012A3ED /* BPAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPAppController.m; sourceTree = "<group>"; };
 		40A0787E120B375E0012A3ED /* TKDinamapBPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDinamapBPController.h; sourceTree = "<group>"; };
 		40A0787F120B375E0012A3ED /* TKDinamapBPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDinamapBPController.m; sourceTree = "<group>"; };
+		40A1ED7C120CA515006A1869 /* BPWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPWindowController.h; sourceTree = "<group>"; };
+		40A1ED7D120CA515006A1869 /* BPWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPWindowController.m; sourceTree = "<group>"; };
 		40F2119D1209F8B400CA2C78 /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = ../TKUtility/build/Release/TKUtility.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +104,8 @@
 				40A07833120B084D0012A3ED /* BPAppController.m */,
 				40A0787E120B375E0012A3ED /* TKDinamapBPController.h */,
 				40A0787F120B375E0012A3ED /* TKDinamapBPController.m */,
+				40A1ED7C120CA515006A1869 /* BPWindowController.h */,
+				40A1ED7D120CA515006A1869 /* BPWindowController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -193,6 +212,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				40A1EE0E120CB60D006A1869 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -251,6 +271,7 @@
 				40949631120A019B00301695 /* BPPreferencesController.m in Sources */,
 				40A07834120B084D0012A3ED /* BPAppController.m in Sources */,
 				40A07880120B375E0012A3ED /* TKDinamapBPController.m in Sources */,
+				40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

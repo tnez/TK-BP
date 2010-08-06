@@ -31,7 +31,7 @@
 -(void) createNewBPInstance {
 	if([self isClearedToBeginSession]) {
 		BPInstance = [[TKDinamapBPController alloc] init];
-		[BPInstance setPort:BP_PORT];
+		[BPInstance setDeviceName:BP_PORT];
 	} else { }
 }
 
@@ -68,7 +68,7 @@
 }
 		
 -(IBAction) quit:(id) sender {
-	if(![BPInstance isWaitingForData]) {
+	if(![BPInstance hasDeterminationInProgress]) {
 		[NSApp terminate];
 	} else {
 		[self alertWithMessage:@"Waiting for data from Dinamap BP"];
