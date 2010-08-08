@@ -69,6 +69,10 @@
 	[super dealloc];
 }
 
+-(NSString *) determinationResponse {
+	return determinationResponse;
+}
+
 -(BOOL) hasDeterminationInProgress {
 	return determinationIsInProgress;
 }
@@ -89,13 +93,12 @@
 		// close old port
 		[port close];
 		// set new port
-		[self setPort:[[[AMSerialPort alloc] init:deviceName withName:deviceName type:(NSString*)CFSTR(kIOSerialBSDTypeKey)] autorelease]];
+		[self setPort:[[[AMSerialPort alloc] init:deviceName withName:deviceName type:(NSString*)CFSTR(kIOSerialBSDRS232Type)] autorelease]];
 		// register self as delegate
 		[port setDelegate:self];
 		// open the port - may take a few seconds
 		if([port open]) {
-			// listen for data in a seperate thread
-			[port readDataInBackground];
+			// ...
 		} else { // an error occured while attempting to create port
 			[self setPort:nil];
 			[self throwError:101];
@@ -111,24 +114,21 @@
 	return oldNIBPReading;
 }
 
+-(BOOL) NIBPReadingIsValid {
+	NSInteger oldTime = 0;
+	NSInteger newTime = 0;
+	oldTime = [[oldNIBPReading substringWithRange:BP_TIME_COUNTER_RANGE] integerValue];
+	newTime = [[newNIBPReading substringWithRange:BP_TIME_COUNTER_RANGE] integerValue];
+	return newTime < oldTime;
+}
+	
 -(AMSerialPort *) port {
 	return port;
 }
 
 -(NSString *) prepareStringForDinamap:(NSString *) string {
-	const char *p = [string cStringUsingEncoding:NSASCIIStringEncoding];
-	int sum = 0;
-	while(*p) {
-		putchar(*p);
-		sum += (*p++ - ' ' + 1);
-		if(sum > 0xFFF) {
-			sum -= 0xFFF;
-		}
-		putchar(' ' + (sum >> 6));
-		putchar(' ' + (sum & 0x3F));
-		putchar(13);
-	}
-	return [[NSString stringWithCString:(const char *)sum encoding:NSASCIIStringEncoding] autorelease];
+	// TODO: reimplement checksum calculation and concatenation
+	return [string stringByAppendingString:@"\r"];
 }
 
 -(void) sendCommand:(NSString *) command {
@@ -137,24 +137,21 @@
 	}
 
 	if([port isOpen]) {
-		// if command is one of two read commads, then ask port to read data in background
-		if([command isEqualToString:BP_READ_NIBP_STATUS] || [command isEqualToString:BP_READ_HEART_RATE]) {
-			[port readDataInBackground];
-		}
-		[port writeString:[self prepareStringForDinamap:command] usingEncoding:NSUTF8StringEncoding error:NULL];
+		[port writeString:[self prepareStringForDinamap:command] usingEncoding:NSASCIIStringEncoding error:NULL];
+		NSString *result = [[port readUpToChar:(char)13 usingEncoding:NSASCIIStringEncoding error:nil] retain];
+		[self performSelector:currentAction withObject:result];
+		[result release];
 	} else { // port is not open
 		NSLog(@"Expected open port, but alas :( it is closed");
 	}
 }
 
--(void) serialPortReadData:(NSDictionary *) dataDictionary {
-	NSData *data = [dataDictionary objectForKey:@"data"];
-	if([data length] > 0) {
-		NSString *result = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-		[self setTargetParameter:result];
-		[result release];
-	} else { // port closed
-		NSLog(@"Port closed when expecting data");
+-(void) setDeterminationResponse:(NSString *) newString {
+	id scratch = nil;
+	if(![newString isEqualToString:determinationResponse]) {
+		scratch = determinationResponse;
+		determinationResponse = [newString retain];
+		[scratch release];
 	}
 }
 
@@ -207,6 +204,11 @@
 		return;
 	}
 
+	// notify delegate that determination has begun
+	if([delegate respondsToSelector:@selector(dinamapDidBeginDataCollection:)]) {
+		[delegate dinamapDidBeginDataCollection:self];
+	}
+	
 	// set flags
 	determinationIsInProgress = YES, shouldBreak = NO;
 	
@@ -214,18 +216,10 @@
 	currentAction = @selector(setOldNIBPReading:);
 	[self sendCommand:BP_READ_NIBP_STATUS];
 	
-	// wait while still resolving old NIBP reading
-	[self waitForResult];
-	
 	// start the determination process
-	currentAction = @selector(setNewNIBPReading:);
+	currentAction=@selector(setDeterminationResponse:);
 	[self sendCommand:BP_START_DETERMINATION];
 	[NSThread detachNewThreadSelector:@selector(startPollingForValidReading) toTarget:self withObject:self];
-	
-	// notify delegate that determination has begun
-	if([delegate respondsToSelector:@selector(dinamapDidBeginDataCollection:)]) {
-		[delegate dinamapDidBeginDataCollection:self];
-	}
 }
 
 -(void) startPollingForValidReading {
@@ -234,7 +228,8 @@
 	NSAutoreleasePool *pollingPool = [[NSAutoreleasePool alloc] init];
 	
 	// grab new reading at each polling interval
-	do { 
+	do {
+		currentAction = @selector(setNewNIBPReading:);
 		[self sendCommand:BP_READ_NIBP_STATUS];
 		sleep(BP_POLLING_FREQUENCY);
 	} while (![self NIBPReadingIsValid] && [port isOpen] && !shouldBreak);
@@ -245,7 +240,6 @@
 		// grab heart rate data
 		currentAction = @selector(setHeartRateReading:);
 		[self sendCommand:BP_READ_HEART_RATE];
-		[self waitForResult];
 		
 		// handle results
 		[self commitResults];
@@ -270,12 +264,14 @@
 }
 
 -(void) waitForResult {
-	myTime.tv_sec = 0, myTime.tv_nsec = 5000;
+	// TODO: fix wait for result
+	/* myTime.tv_sec = 0, myTime.tv_nsec = 500000;
 	// while there is an action to be resolved . . .
 	while(currentAction) {
 		// ... sleep for a short time
 		nanosleep(&myTime, NULL);
-	}
+	} */
+	sleep(2);
 }
 
 @end

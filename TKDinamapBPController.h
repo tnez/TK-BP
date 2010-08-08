@@ -25,10 +25,10 @@
 /**
  Command Definitions For Dinamap BP
 */
-#define BP_START_DETERMINATION @" NC0"
-#define BP_CANCEL_DETERMINATION @" ND"
-#define BP_READ_NIBP_STATUS @" NA"
-#define BP_READ_HEART_RATE @" RC"
+#define BP_START_DETERMINATION @" NC0!E"
+#define BP_CANCEL_DETERMINATION @" ND!5"
+#define BP_READ_NIBP_STATUS @" NA!2"
+#define BP_READ_HEART_RATE @" RC!8"
 /**
  Ranges For Data Extraction
  */
@@ -49,6 +49,7 @@
 	SEL currentAction;				// action to be performed when we read data from serial port
 	id delegate;
 	BOOL determinationIsInProgress;
+	NSString *determinationResponse;
 	NSString *deviceName;			// full path to port i.e. /dev/cu.usbserial-A600b3gB
 	NSString *diastolic;			// resolved diastolic reading
 	NSString *heartRate;			// resolved heartRate reading
@@ -63,6 +64,7 @@
 	AMSerialPort *port;				// Our Dinamap BP as a serial port
 	BOOL shouldBreak;				// used to terminate polling loop
 	NSString *systolic;				// resolved systolic reading
+	NSString *targetString;
 	struct timespec myTime;			// value used in loops to wait for events	
 }
 @property (assign) id delegate;
