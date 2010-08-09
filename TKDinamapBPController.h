@@ -141,11 +141,19 @@
 
 @interface NSObject (TKDinamapBPControllerDelegate)
 
+/* TODO: Change from delegate messages to notifications - this makes more sense going forward, but event / error occurences will still be passed to delegate to facilitate a chain of information handling */
+
 /**
  @function dinamapDidBeginDataCollection:
  @abstract Sent to delegate after the Dinamap BP monitor is sent the message to start NIBP determination
  */
 -(void) dinamapDidBeginDataCollection:(id) sender;
+
+/**
+ @function dinamapDidCancelDataCollection:
+ @abstract Sent to delegate after the Dinamap BP monitor is sent the message to cancel NIBP determination, if and only if a determination is currently taking place
+ */
+-(void) dinamapDidCancelDataCollection:(id) sender;
 
 /**
  @function dinamapDidFinishDataCollection:
