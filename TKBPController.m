@@ -21,13 +21,21 @@
  
  ***************************************************************/
 
-#import "TKDinamapBPController.h"
+#import "TKBPController.h"
 
 
-@implementation TKDinamapBPController
-@synthesize delegate,deviceName,diastolic,heartRate,systolic;
+@implementation TKBPController
+@synthesize delegate,deviceName,diastolic,heartRate,map,systolic;
+
+-(void) addSubject {
+	// create an empty subject entry
+	[subjects addObject:[NSMutableDictionary dictionary]];
+}
 
 -(void) awakeFromNib {
+	// perform initialization
+	[self loadSubjects];
+	
 	// register for port add/remove notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAddPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRemovePorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];	
@@ -40,10 +48,13 @@
 }
 
 -(void) commitResults {
-	// record the results
-	[self setDiastolic:[newNIBPReading substringWithRange:BP_DIASTOLIC_RANGE]];
-	[self setHeartRate:[heartRateReading substringWithRange:BP_HEART_RATE_RANGE]];
-	[self setSystolic:[newNIBPReading substringWithRange:BP_SYSTOLIC_RANGE]];
+	
+	// record the results in subject dictionary
+	[currentSubject setValue:[newNIBPReading substringWithRange:BP_DIASTOLIC_RANGE] forKey:@"dis"];
+	[currentSubject	setValue:[heartRateReading substringWithRange:BP_HEART_RATE_RANGE] forKey:@"hr"];
+	[currentSubject	setValue:[[NSDate date] description] forKey:@"last"];
+	[currentSubject setValue:[newNIBPReading substringWithRange:BP_MAP_RANGE] forKey:@"map"];
+	[currentSubject setValue:[newNIBPReading substringWithRange:BP_SYSTOLIC_RANGE] forKey:@"sys"];
 	
 	// send delegate messages
 	if([delegate respondsToSelector:@selector(dinamapDidFinishDataCollection:)]) {
@@ -65,6 +76,7 @@
 	[diastolic release];
 	[heartRate release];
 	[port release];
+	[subjects release];
 	[systolic release];
 	[super dealloc];
 }
@@ -83,9 +95,11 @@
 
 -(id) init {
 	if(self=[super init]) {
+		[self awakeFromNib];
 		return self;
+	} else {
+		return nil;
 	}
-	return nil;
 }
 
 -(void) initPort {
@@ -106,6 +120,12 @@
 	}
 }
 
+-(void) loadSubjects {
+	// load dictionary from disk
+	NSDictionary *disk = [NSDictionary dictionaryWithContentsOfFile:[BP_SUBJECT_FILE_PATH stringByAppendingPathComponent:BP_DEFAULT_SUBJECT_FILE_NAME]];
+	subjects = [[NSMutableArray alloc] initWithArray:[disk valueForKey:@"subjects"]];
+}
+
 -(NSString *) newNIBPReading {
 	return newNIBPReading;
 }
@@ -115,6 +135,12 @@
 }
 
 -(BOOL) NIBPReadingIsValid {
+
+	// check that both old and new time are appropriate length strings
+	if([oldNIBPReading length] < BP_READING_MIN_LENGTH ||
+	   [newNIBPReading length] < BP_READING_MIN_LENGTH) { return NO; }
+	
+	// if strings are long enough to consider valid, continue
 	NSInteger oldTime = 0;
 	NSInteger newTime = 0;
 	oldTime = [[oldNIBPReading substringWithRange:BP_TIME_COUNTER_RANGE] integerValue];
@@ -129,6 +155,33 @@
 -(NSString *) prepareStringForDinamap:(NSString *) string {
 	// TODO: reimplement checksum calculation and concatenation
 	return [string stringByAppendingString:@"\r"];
+}
+
+-(void) removeSubjectAtIndex:(NSInteger) index {
+	if(index > -1 && index < [subjects count]) {
+		[subjects removeObjectAtIndex:index];
+	}
+}
+	
+-(void) saveSubjects {
+	// remove last,hr,sys,dis,map from subjects array
+	NSArray *keysToRemove = [NSArray arrayWithObjects:@"last",@"hr",@"sys",@"dis",@"map",nil];
+	for(NSMutableDictionary *subject in subjects) {
+		[subject removeObjectsForKeys:keysToRemove];
+	}
+	// create new subject dictionary
+	NSDictionary *info = [NSDictionary dictionaryWithObject:subjects forKey:@"subjects"];
+	// write new subject dictionary to file
+	[info writeToFile:[BP_SUBJECT_FILE_PATH stringByAppendingPathComponent:BP_DEFAULT_SUBJECT_FILE_NAME] atomically:NO];
+}
+
+-(void) setCurrentSubject:(NSInteger) index {
+	// if index represents a valid subject . . .
+	if(index > -1 && index < [subjects count]) {
+		currentSubject = [subjects objectAtIndex:index];
+	} else { // index not valid
+		currentSubject = nil;
+	}
 }
 
 -(void) sendCommand:(NSString *) command {
@@ -195,7 +248,11 @@
 	[self performSelector:currentAction withObject:newString];
 	currentAction = nil;
 }
-		
+
+-(id) subjects {
+	return subjects;
+}
+
 -(void) startDetermination {
 	
 	// if there is already a determination in progress, exit immediately
@@ -261,17 +318,6 @@
 		[delegate error:[error autorelease] didOccurrInComponent:self];
 	}
 	NSLog(@"Domain=TKDinamapBPController Code=%d",errorCode);
-}
-
--(void) waitForResult {
-	// TODO: fix wait for result
-	/* myTime.tv_sec = 0, myTime.tv_nsec = 500000;
-	// while there is an action to be resolved . . .
-	while(currentAction) {
-		// ... sleep for a short time
-		nanosleep(&myTime, NULL);
-	} */
-	sleep(2);
 }
 
 @end

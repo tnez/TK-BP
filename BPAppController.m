@@ -12,11 +12,12 @@
 @implementation BPAppController
 
 -(void) alertWithMessage:(NSString *) message {
-	[NSAlert alertWithMessageText:@"Error:"
-					defaultButton:@"OK"
-				  alternateButton:nil
-					  otherButton:nil
-		informativeTextWithFormat:message];
+	NSAlert *alert =[NSAlert alertWithMessageText:@"Error:"
+									defaultButton:@"OK"
+								  alternateButton:nil
+									  otherButton:nil
+						informativeTextWithFormat:message];
+	[alert runModal];
 }
 
 -(void) awakeFromNib {
@@ -24,18 +25,15 @@
 	[NSApp setDelegate:self];
 	// if should run on launch, then begin
 	if(SHOULD_RUN_ON_LAUNCH) {
-		[self openNewBPWindow:self];
-	} else { }
-}
-
--(void) createNewBPInstance {
-	if([self isClearedToBeginSession]) {
-		BPInstance = [[TKDinamapBPController alloc] init];
-		[BPInstance setDeviceName:BP_PORT];
-	} else { }
+		if([self isClearedToBeginSession]) {
+			[self openNewBPWindow:self];
+		} else {}
+	} else {}
 }
 
 -(BOOL) isClearedToBeginSession {
+	// TODO: reimplement
+	return YES;
 	// check that data directory exists
 	BOOL isDirectory, exists;
 	exists = [[NSFileManager defaultManager] fileExistsAtPath:DATA_DIRECTORY isDirectory:&isDirectory];
@@ -47,12 +45,15 @@
 	return YES;
 }
 
+-(BOOL) isClearedToEndSession {
+	// TODO: return NO if we are currently undergoing determination
+	return YES;
+}
+
 -(IBAction) openNewBPWindow:(id) sender {
-	if(!BPInstance) {
-		[self createNewBPInstance];		
-		if([NSBundle loadNibNamed:BP_WINDOW_NIB_FILE owner:BPInstance]) {
-			// . . .
-		} else {}
+	if([self isClearedToBeginSession]) {
+		[NSBundle loadNibNamed:BP_WINDOW_NIB_FILE owner:self];
+		
 	} else {}
 }
 
@@ -68,7 +69,7 @@
 }
 		
 -(IBAction) quit:(id) sender {
-	if(![BPInstance hasDeterminationInProgress]) {
+	if([self isClearedToEndSession]) {
 		[NSApp terminate];
 	} else {
 		[self alertWithMessage:@"Waiting for data from Dinamap BP"];

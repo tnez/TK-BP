@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <TKUtility/TKUtility.h>
-#import "TKDinamapBPController.h"
+#import "TKBPController.h"
 
 #define BP_PORT [[TKPreferences defaultPrefs] valueForKey:@"bpSerialPortName"]
 #define BP_WINDOW_NIB_FILE @"BPWindow"
@@ -22,7 +22,6 @@
 @interface BPAppController : NSObject {
 @private
 	NSTask *dataFileTask;
-	TKDinamapBPController *BPInstance;
 }
 
 /**
@@ -36,6 +35,13 @@
  @abstract Runs a series of tests to determine if the applications requirements are met
  @result Returns TRUE if the application can proceed
 */
+-(BOOL) isClearedToBeginSession;
+
+/**
+ @function isClearedToEndSession
+ @abstract Runs a series of tests to determine if the applications is okay to quit
+ @result Returns TRUE if the application is okay to quit; i.e. no data collection is currently taking place
+ */
 -(BOOL) isClearedToBeginSession;
 
 /**

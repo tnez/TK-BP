@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">9L31a</string>
+		<string key="IBDocument.SystemVersion">9L30</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="3"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -43,6 +43,7 @@
 				<string key="NSWindowTitle">Preferences: BP</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="761010927">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -144,10 +145,9 @@
 								<reference key="NSSupport" ref="83411011"/>
 								<reference key="NSControlView" ref="558259345"/>
 								<bool key="NSDrawsBackground">YES</bool>
-								<int key="NSTextBezelStyle">1</int>
-								<object class="NSColor" key="NSBackgroundColor" id="263446147">
+								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAgMC43NQA</bytes>
+									<bytes key="NSRGB">MC44MzY5NTY1IDAuODM2OTU2NSAwLjgzNjk1NjUAA</bytes>
 								</object>
 								<object class="NSColor" key="NSTextColor" id="589930953">
 									<int key="NSColorSpace">6</int>
@@ -167,14 +167,16 @@
 							<reference key="NSSuperview" ref="761010927"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="401991185">
-								<int key="NSCellFlags">-1804468671</int>
+								<int key="NSCellFlags">-1808662975</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="83411011"/>
 								<reference key="NSControlView" ref="689052151"/>
 								<bool key="NSDrawsBackground">YES</bool>
-								<int key="NSTextBezelStyle">1</int>
-								<reference key="NSBackgroundColor" ref="263446147"/>
+								<object class="NSColor" key="NSBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC44MzY5NTY1IDAuODM2OTU2NSAwLjgzNjk1NjUAA</bytes>
+								</object>
 								<reference key="NSTextColor" ref="589930953"/>
 							</object>
 						</object>
@@ -191,10 +193,9 @@
 								<reference key="NSSupport" ref="83411011"/>
 								<reference key="NSControlView" ref="1039078482"/>
 								<bool key="NSDrawsBackground">YES</bool>
-								<int key="NSTextBezelStyle">1</int>
 								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAgMC43NQA</bytes>
+									<bytes key="NSRGB">MC44MzY5NTY1IDAuODM2OTU2NSAwLjgzNjk1NjUAA</bytes>
 								</object>
 								<reference key="NSTextColor" ref="589930953"/>
 							</object>
@@ -534,6 +535,28 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">AMSerial (Andreas Mayer)/AMSerialPort.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>dinamapDidBeginDataCollection:</string>
+							<string>dinamapDidCancelDataCollection:</string>
+							<string>dinamapDidFinishDataCollection:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">TKBPController.h</string>
 					</object>
 				</object>
 			</object>

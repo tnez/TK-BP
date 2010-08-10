@@ -20,9 +20,11 @@
 		40949628120A002100301695 /* preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40949627120A002100301695 /* preferences.plist */; };
 		40949631120A019B00301695 /* BPPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40949630120A019B00301695 /* BPPreferencesController.m */; };
 		40A07834120B084D0012A3ED /* BPAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A07833120B084D0012A3ED /* BPAppController.m */; };
-		40A07880120B375E0012A3ED /* TKDinamapBPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A0787F120B375E0012A3ED /* TKDinamapBPController.m */; };
+		40A07880120B375E0012A3ED /* TKBPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A0787F120B375E0012A3ED /* TKBPController.m */; };
 		40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A1ED7D120CA515006A1869 /* BPWindowController.m */; };
 		40A1EE12120CB61B006A1869 /* TKUtility.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
+		40DD9B38121189300091BCB2 /* BPWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40DD9B37121189300091BCB2 /* BPWindow.xib */; };
+		40DD9B3E12119BE40091BCB2 /* subjects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DD9B3D12119BE40091BCB2 /* subjects.plist */; };
 		40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -72,10 +74,12 @@
 		40949630120A019B00301695 /* BPPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesController.m; sourceTree = "<group>"; };
 		40A07832120B084D0012A3ED /* BPAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPAppController.h; sourceTree = "<group>"; };
 		40A07833120B084D0012A3ED /* BPAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPAppController.m; sourceTree = "<group>"; };
-		40A0787E120B375E0012A3ED /* TKDinamapBPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDinamapBPController.h; sourceTree = "<group>"; };
-		40A0787F120B375E0012A3ED /* TKDinamapBPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDinamapBPController.m; sourceTree = "<group>"; };
+		40A0787E120B375E0012A3ED /* TKBPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBPController.h; sourceTree = "<group>"; };
+		40A0787F120B375E0012A3ED /* TKBPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBPController.m; sourceTree = "<group>"; };
 		40A1ED7C120CA515006A1869 /* BPWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPWindowController.h; sourceTree = "<group>"; };
 		40A1ED7D120CA515006A1869 /* BPWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPWindowController.m; sourceTree = "<group>"; };
+		40DD9B37121189300091BCB2 /* BPWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BPWindow.xib; sourceTree = "<group>"; };
+		40DD9B3D12119BE40091BCB2 /* subjects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = subjects.plist; sourceTree = "<group>"; };
 		40F2119D1209F8B400CA2C78 /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = ../TKUtility/build/Release/TKUtility.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,8 +106,8 @@
 				40949630120A019B00301695 /* BPPreferencesController.m */,
 				40A07832120B084D0012A3ED /* BPAppController.h */,
 				40A07833120B084D0012A3ED /* BPAppController.m */,
-				40A0787E120B375E0012A3ED /* TKDinamapBPController.h */,
-				40A0787F120B375E0012A3ED /* TKDinamapBPController.m */,
+				40A0787E120B375E0012A3ED /* TKBPController.h */,
+				40A0787F120B375E0012A3ED /* TKBPController.m */,
 				40A1ED7C120CA515006A1869 /* BPWindowController.h */,
 				40A1ED7D120CA515006A1869 /* BPWindowController.m */,
 			);
@@ -167,6 +171,8 @@
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				400E63A91208B6930070AACD /* preferences.xib */,
 				40949627120A002100301695 /* preferences.plist */,
+				40DD9B37121189300091BCB2 /* BPWindow.xib */,
+				40DD9B3D12119BE40091BCB2 /* subjects.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -251,6 +257,8 @@
 				400E63AA1208B6930070AACD /* preferences.xib in Resources */,
 				401D7AE11209F657006F618F /* BSD License.txt in Resources */,
 				40949628120A002100301695 /* preferences.plist in Resources */,
+				40DD9B38121189300091BCB2 /* BPWindow.xib in Resources */,
+				40DD9B3E12119BE40091BCB2 /* subjects.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +278,7 @@
 				401D7AE01209F657006F618F /* AMStandardEnumerator.m in Sources */,
 				40949631120A019B00301695 /* BPPreferencesController.m in Sources */,
 				40A07834120B084D0012A3ED /* BPAppController.m in Sources */,
-				40A07880120B375E0012A3ED /* TKDinamapBPController.m in Sources */,
+				40A07880120B375E0012A3ED /* TKBPController.m in Sources */,
 				40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

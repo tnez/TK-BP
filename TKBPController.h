@@ -34,45 +34,63 @@
  */
 #define BP_DIASTOLIC_RANGE NSMakeRange(13,3)
 #define BP_HEART_RATE_RANGE NSMakeRange(4,3)
+#define BP_MAP_RANGE NSMakeRange(16,3)
 #define BP_STATUS_RANGE NSMakeRange(3,1)
 #define BP_SYSTOLIC_RANGE NSMakeRange(10,3)
 #define BP_TIME_COUNTER_RANGE NSMakeRange(6,4)
 /**
  Behavior
  */
-#define BP_POLLING_FREQUENCY 5
+#define BP_POLLING_FREQUENCY 1
+#define BP_READING_MIN_LENGTH 20 // if reading is less than this length, will not consider valid reading
+/**
+ Environment
+ */
+#define BP_DEFAULT_SUBJECT_FILE_NAME @"subjects.plist"
+#define BP_SUBJECT_FILE_PATH [[NSBundle mainBundle] resourcePath]
 
 
 
-@interface TKDinamapBPController : NSObject {
+@interface TKBPController : NSObject {
 	@private
-	SEL currentAction;				// action to be performed when we read data from serial port
-	id delegate;
-	BOOL determinationIsInProgress;
-	NSString *determinationResponse;
-	NSString *deviceName;			// full path to port i.e. /dev/cu.usbserial-A600b3gB
-	NSString *diastolic;			// resolved diastolic reading
-	NSString *heartRate;			// resolved heartRate reading
-	NSString *heartRateReading;		// This value represents the entire heart rate string
-									// returned from the machine	
-	NSString *newNIBPReading;		// This value is used internally and represents the
-									// value taken after a determination is started, new
-									// and old NIBP readings will be compared to determine
-									// when the new reading is valid
-	NSString *oldNIBPReading;		// This reading is used internally and represents the
-									// value taken right before starting a new determination
-	AMSerialPort *port;				// Our Dinamap BP as a serial port
-	BOOL shouldBreak;				// used to terminate polling loop
-	NSString *systolic;				// resolved systolic reading
-	NSString *targetString;
-	struct timespec myTime;			// value used in loops to wait for events	
+	SEL currentAction;				 // action to be performed when we read data from serial port
+	NSMutableDictionary *currentSubject;	// the subject we are currently dealing with, as a
+											// mutable dictionary
+	id delegate;					 // should be whatever object will be handling data
+	BOOL determinationIsInProgress;  // 
+	NSString *determinationResponse; //
+	NSString *deviceName;			 // full path to port i.e. /dev/cu.usbserial-A600b3gB
+	NSString *diastolic;			 // resolved diastolic reading
+	NSString *heartRate;			 // resolved heartRate reading
+	NSString *heartRateReading;		 // This value represents the entire heart rate string
+									 // returned from the machine
+	NSString *map;					 // resolved mean arterial pressure
+	NSString *newNIBPReading;		 // This value is used internally and represents the
+									 // value taken after a determination is started, new
+									 // and old NIBP readings will be compared to determine
+									 // when the new reading is valid
+	NSString *oldNIBPReading;		 // This reading is used internally and represents the
+									 // value taken right before starting a new determination
+	AMSerialPort *port;				 // Our Dinamap BP as a serial port
+	BOOL shouldBreak;				 // used to terminate polling loop
+	NSString *systolic;				 // resolved systolic reading
+	NSMutableArray *subjects;		 // contains all saved subjects for this study, also
+									 // contains BP data pertaining to this study
+									 // each record is a dictionary with the keys:
+									 // {name,id,study,last,hr,sys,dis,map}	
+	NSString *targetString;			 //	
+	struct timespec myTime;			 // value used in loops to wait for events	
 }
 @property (assign) id delegate;
 @property (nonatomic, retain) NSString *deviceName;		// full path to port i.e. /dev/cu.usbserial-A600b3gB
-@property (nonatomic, retain) NSString *diastolic;		// valid diastolic reading
-@property (nonatomic, retain) NSString *heartRate;		// valid heart rate reading
-@property (nonatomic, retain) NSString *systolic;		// resolved systolic reading	
+@property (nonatomic, retain) NSString *diastolic;		// diastolic reading
+@property (nonatomic, retain) NSString *heartRate;		// heart rate reading
+@property (nonatomic, retain) NSString *map;			// map reading
+@property (nonatomic, retain) NSString *systolic;		// systolic reading	
 
+-(void) addSubject;
+-(id) subjects;
+-(void) removeSubjectAtIndex:(NSInteger) index;
 /**
  @function startDetermination
  @abstract Initiates NIBP determination sequence for Dinamap BP machine on established port.
@@ -84,13 +102,6 @@
  @abstract Cancels any currently running NIBP determination sequence for Dinamap BP on established port.
  */
 -(void) cancelDetermination;
-
-/**
- @function systolic
- @result The last recorded systolic value or nil.
- @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
- */
--(NSString *) systolic;
 
 /**
  @function diastolic
@@ -112,19 +123,41 @@
  */
 -(NSString *) heartRate;
 
+/**
+ @function map
+ @result The last recorded map value or nil.
+ @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
+ */
+-(NSString *) map;
+
+/**
+ @function setCurrentSubject:
+ @discussion Set the value of the subject on which we intent to perform some kind of operation
+ */
+-(void) setCurrentSubject:(NSInteger) index;
+
+/**
+ @function systolic
+ @result The last recorded systolic value or nil.
+ @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
+ */
+-(NSString *) systolic;
 
 @end
 
 
-@interface TKDinamapBPController (TKDinamapBPControllerPrivate)
+@interface TKBPController (TKDinamapBPControllerPrivate)
+-(void) awakeFromNib;
 -(void) commitResults;
 -(NSString *) heartRateReading;
 -(void) initPort;
+-(void) loadSubjects;
 -(NSString *) newNIBPReading;
 -(BOOL) NIBPReadingIsValid;
 -(NSString *) oldNIBPReading;
 -(AMSerialPort *) port;
 -(NSString *) prepareStringForDinamap:(NSString *) string;
+-(void) saveSubjects;
 -(void) serialPortReadData:(NSDictionary *) dictionary;
 -(void) sendCommand:(NSString *) string;
 -(void) setHeartRateReading:(NSString *) newString;
