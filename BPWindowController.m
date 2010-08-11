@@ -15,6 +15,8 @@
 -(void) awakeFromNib {
 	// set device name for dinamap
 	[dinamap setDeviceName:[[TKPreferences defaultPrefs] valueForKey:@"bpSerialPortName"]];
+	// register for notifications from dinamap
+
 	// load subject data
 	subjects = [[TKSubjects alloc] init];
 	[subjectTable reloadData];

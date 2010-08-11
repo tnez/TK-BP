@@ -7,7 +7,7 @@
 	<key>dataFileName</key>
 	<string>BP.data</string>
 	<key>dataDirectory</key>
-	<string></string>
+	<string>~/Desktop/DATA</string>
 	<key>bpSerialPortName</key>
 	<string>/dev/cu.usbserial-A600b3gB</string>
 	<key>bpShouldRecordSystolic</key>

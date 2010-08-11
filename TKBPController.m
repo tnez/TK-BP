@@ -58,8 +58,20 @@
 		// send data
 		[delegate event:[info autorelease] didOccurrInComponent:self];
 	}
+	
+	// perform simple logging of data
+	[self performSimpleLogging];
+	
 	// reset determination flag
 	determinationIsInProgress = NO;
+}
+
+-(NSString *) datafile {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"MM/DD/YY"];
+	NSString *_filename = [NSString stringWithFormat:@"@%-@% %@ BP",
+												 subject,study,[formatter stringFromDate:[NSDate date]]];
+	return [_filename autorelease];
 }
 
 -(void) dealloc {
@@ -131,7 +143,13 @@
 	newTime = [[newNIBPReading substringWithRange:BP_TIME_COUNTER_RANGE] integerValue];
 	return newTime < oldTime;
 }
-	
+
+-(void) performSimpleLogging {
+	NSString *dataString = [NSString stringWithFormat:@"%@\t%@\n%@\t%@\t%@\t%@\n\n",
+													[self datafile],[self time],heartRate,systolic,diastolic,map];
+	[dataString writeToFile:[BP_DATA_DIRECTORY stringByAppendingPathComponent:[self datafile]] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
 -(AMSerialPort *) port {
 	return port;
 }
@@ -264,7 +282,13 @@
 	// release the autorelease pool
 	[pollingPool drain], [pollingPool release];
 }
-	
+
+-(NSString *) time {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"HH:MM:SS"];
+	return [formatter stringFromDate:[NSDate date]];
+}
+
 -(void) throwError:(NSInteger) errorCode {
 	NSError *error = [NSError errorWithDomain:@"TKDinamapBPController" code:errorCode userInfo:nil];
 	if([delegate respondsToSelector:@selector(error:didOccurrInComponent:)]) {

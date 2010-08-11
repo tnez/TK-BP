@@ -70,7 +70,7 @@
 		
 -(IBAction) quit:(id) sender {
 	if([self isClearedToEndSession]) {
-		[NSApp terminate];
+		[NSApp terminate:self];
 	} else {
 		[self alertWithMessage:@"Waiting for data from Dinamap BP"];
 	}

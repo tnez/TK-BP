@@ -19,6 +19,7 @@
  ***************************************************************/
 
 #import <Cocoa/Cocoa.h>
+#import <TKUtility/TKUtility.h>
 #import "AMSerialPortList.h"
 #import "AMSerialPortAdditions.h"
 
@@ -46,8 +47,8 @@
 /**
  Environment
  */
-#define BP_DEFAULT_SUBJECT_FILE_NAME @"subjects.plist"
-#define BP_SUBJECT_FILE_PATH [[NSBundle mainBundle] resourcePath]
+#define BP_DATA_DIRECTORY [[TKPreferences defaultPrefs] valueForKey:@"dataDirectory"]
+
 
 
 
@@ -140,12 +141,14 @@
 @interface TKBPController (TKDinamapBPControllerPrivate)
 -(void) awakeFromNib;
 -(void) commitResults;
+-(NSString *) datafile;
 -(NSString *) heartRateReading;
 -(void) initPort;
 -(void) loadSubjects;
 -(NSString *) newNIBPReading;
 -(BOOL) NIBPReadingIsValid;
 -(NSString *) oldNIBPReading;
+-(void) performSimpleLogging;
 -(AMSerialPort *) port;
 -(NSString *) prepareStringForDinamap:(NSString *) string;
 -(void) saveSubjects;
@@ -157,6 +160,7 @@
 -(void) setPort:(AMSerialPort *) newPort;
 -(void) setTargetParameter:(NSString *) newString;
 -(void) startPollingForValidReading;
+-(NSString *) time;
 -(NSInteger) timeCounterForReading:(NSString *) reading;
 -(void) throwError:(NSInteger) errorCode;
 -(void) waitForResult;
