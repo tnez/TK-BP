@@ -9,29 +9,41 @@
 #import <Cocoa/Cocoa.h>
 #import <TKUtility/TKUtility.h>
 #import "TKBPController.h"
+#import "TKSubjects.h"
 
 @interface BPWindowController : NSObject {
 	IBOutlet NSButton *cancelButton;
 	IBOutlet NSButton *startButton;
 	IBOutlet NSTableView *subjectTable;
+	IBOutlet NSTextView *logView;
+	IBOutlet NSWindow *window;
 	IBOutlet TKBPController *dinamap;
+	TKSubjects *subjects;
 }
 @property (assign) IBOutlet NSButton *cancelButton;
 @property (assign) IBOutlet NSButton *startButton;
 @property (assign) IBOutlet NSTableView *subjectTable;
+@property (assign) IBOutlet NSTextView *logView;
+@property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet TKBPController *dinamap;
+@property (retain) TKSubjects *subjects;
+
 #pragma mark UI COMMANDS
--(IBAction) addSubject:(id) sender;
+-(IBAction) addNewSubject:(id) sender;
 -(IBAction) beginNIBPDetermination:(id) sender;
 -(IBAction) cancelNIBPDetermination:(id) sender;
--(IBAction) removeSubject:(id) sender;
+-(IBAction) removeSelectedSubject:(id) sender;
 -(IBAction) toggleLogView:(id) sender;
+
 #pragma mark DINAMAP NOTIFICATIONS
 -(void) dinamapDidBeginDataCollection:(id) sender;
 -(void) dinamapDidFinishDataCollection:(id) sender;
-#pragma mark TABLE VIEW DATA SOURCE METHODS
--(int) numberOfRowsInTableView:(NSTableView *) tableView;
--(id) tableView:(NSTableView *) tableView objectValueForTableColumn:(NSTableColumn *) column row:(int) rowIndex;
+
+#pragma mark TABLE VIEW RESPONSIBILITIES
+-(NSInteger) numberOfRowsInTableView:(NSTableView *) table;
+-(void) tableView:(NSTableView *) table setObjectValue:(id) newObject forTableColumn:(NSTableColumn *) column row:(NSInteger) row;
+-(id) tableView:(NSTableView *) table objectValueForTableColumn:(NSTableColumn *) column row:(NSInteger) row;
+
 #pragma mark WINDOW DELEGATE RESPONSIBILITIES
 -(BOOL) windowShouldClose:(id) sender;
 -(void) windowWillClose:(NSNotification *) notification;

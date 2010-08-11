@@ -23,6 +23,7 @@
 		40A07880120B375E0012A3ED /* TKBPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A0787F120B375E0012A3ED /* TKBPController.m */; };
 		40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A1ED7D120CA515006A1869 /* BPWindowController.m */; };
 		40A1EE12120CB61B006A1869 /* TKUtility.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
+		40DBB23112124522008ACC9F /* TKSubjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBB23012124522008ACC9F /* TKSubjects.m */; };
 		40DD9B38121189300091BCB2 /* BPWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40DD9B37121189300091BCB2 /* BPWindow.xib */; };
 		40DD9B3E12119BE40091BCB2 /* subjects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DD9B3D12119BE40091BCB2 /* subjects.plist */; };
 		40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
@@ -78,6 +79,8 @@
 		40A0787F120B375E0012A3ED /* TKBPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBPController.m; sourceTree = "<group>"; };
 		40A1ED7C120CA515006A1869 /* BPWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPWindowController.h; sourceTree = "<group>"; };
 		40A1ED7D120CA515006A1869 /* BPWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPWindowController.m; sourceTree = "<group>"; };
+		40DBB22F12124522008ACC9F /* TKSubjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSubjects.h; sourceTree = "<group>"; };
+		40DBB23012124522008ACC9F /* TKSubjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSubjects.m; sourceTree = "<group>"; };
 		40DD9B37121189300091BCB2 /* BPWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BPWindow.xib; sourceTree = "<group>"; };
 		40DD9B3D12119BE40091BCB2 /* subjects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = subjects.plist; sourceTree = "<group>"; };
 		40F2119D1209F8B400CA2C78 /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = ../TKUtility/build/Release/TKUtility.framework; sourceTree = SOURCE_ROOT; };
@@ -110,6 +113,8 @@
 				40A0787F120B375E0012A3ED /* TKBPController.m */,
 				40A1ED7C120CA515006A1869 /* BPWindowController.h */,
 				40A1ED7D120CA515006A1869 /* BPWindowController.m */,
+				40DBB22F12124522008ACC9F /* TKSubjects.h */,
+				40DBB23012124522008ACC9F /* TKSubjects.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				40A07834120B084D0012A3ED /* BPAppController.m in Sources */,
 				40A07880120B375E0012A3ED /* TKBPController.m in Sources */,
 				40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */,
+				40DBB23112124522008ACC9F /* TKSubjects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

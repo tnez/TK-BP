@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>subjects</key>
-	<array>
-		<dict>
-			<key>name</key>
-			<string>Travis</string>
-			<key>id</key>
-			<string>9999</string>
-			<key>study</key>
-			<string>011</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Cassie</string>
-			<key>id</key>
-			<string>8888</string>
-			<key>study</key>
-			<string>012</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Dusty</string>
-			<key>id</key>
-			<string>7777</string>
-			<key>study</key>
-			<string>007</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Samantha</string>
-			<key>id</key>
-			<string>1234</string>
-			<key>study</key>
-			<string>024</string>
-		</dict>
-	</array>
-</dict>
+<array>
+	<dict>
+		<key>name</key>
+		<string>Travis</string>
+		<key>id</key>
+		<string>0317</string>
+		<key>study</key>
+		<string>007</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Cassie</string>
+		<key>id</key>
+		<string>0703</string>
+		<key>study</key>
+		<string>011</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Megan</string>
+		<key>id</key>
+		<string>0801</string>
+		<key>study</key>
+		<string>007</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Ricky</string>
+		<key>id</key>
+		<string>0713</string>
+		<key>study</key>
+		<string>007</string>
+	</dict>
+</array>
 </plist>

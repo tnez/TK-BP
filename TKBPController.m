@@ -25,17 +25,9 @@
 
 
 @implementation TKBPController
-@synthesize delegate,deviceName,diastolic,heartRate,map,systolic;
-
--(void) addSubject {
-	// create an empty subject entry
-	[subjects addObject:[NSMutableDictionary dictionary]];
-}
+@synthesize delegate,deviceName,diastolic,heartRate,map,study,subject,systolic;
 
 -(void) awakeFromNib {
-	// perform initialization
-	[self loadSubjects];
-	
 	// register for port add/remove notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAddPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRemovePorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];	
@@ -50,11 +42,10 @@
 -(void) commitResults {
 	
 	// record the results in subject dictionary
-	[currentSubject setValue:[newNIBPReading substringWithRange:BP_DIASTOLIC_RANGE] forKey:@"dis"];
-	[currentSubject	setValue:[heartRateReading substringWithRange:BP_HEART_RATE_RANGE] forKey:@"hr"];
-	[currentSubject	setValue:[[NSDate date] description] forKey:@"last"];
-	[currentSubject setValue:[newNIBPReading substringWithRange:BP_MAP_RANGE] forKey:@"map"];
-	[currentSubject setValue:[newNIBPReading substringWithRange:BP_SYSTOLIC_RANGE] forKey:@"sys"];
+	[self setDiastolic:[newNIBPReading substringWithRange:BP_DIASTOLIC_RANGE]];
+	[self setHeartRate:[heartRateReading substringWithRange:BP_HEART_RATE_RANGE]];
+	[self setMap:[newNIBPReading substringWithRange:BP_MAP_RANGE]];
+	[self setSystolic:[newNIBPReading substringWithRange:BP_SYSTOLIC_RANGE]];
 	
 	// send delegate messages
 	if([delegate respondsToSelector:@selector(dinamapDidFinishDataCollection:)]) {
@@ -76,7 +67,6 @@
 	[diastolic release];
 	[heartRate release];
 	[port release];
-	[subjects release];
 	[systolic release];
 	[super dealloc];
 }
@@ -120,12 +110,6 @@
 	}
 }
 
--(void) loadSubjects {
-	// load dictionary from disk
-	NSDictionary *disk = [NSDictionary dictionaryWithContentsOfFile:[BP_SUBJECT_FILE_PATH stringByAppendingPathComponent:BP_DEFAULT_SUBJECT_FILE_NAME]];
-	subjects = [[NSMutableArray alloc] initWithArray:[disk valueForKey:@"subjects"]];
-}
-
 -(NSString *) newNIBPReading {
 	return newNIBPReading;
 }
@@ -155,33 +139,6 @@
 -(NSString *) prepareStringForDinamap:(NSString *) string {
 	// TODO: reimplement checksum calculation and concatenation
 	return [string stringByAppendingString:@"\r"];
-}
-
--(void) removeSubjectAtIndex:(NSInteger) index {
-	if(index > -1 && index < [subjects count]) {
-		[subjects removeObjectAtIndex:index];
-	}
-}
-	
--(void) saveSubjects {
-	// remove last,hr,sys,dis,map from subjects array
-	NSArray *keysToRemove = [NSArray arrayWithObjects:@"last",@"hr",@"sys",@"dis",@"map",nil];
-	for(NSMutableDictionary *subject in subjects) {
-		[subject removeObjectsForKeys:keysToRemove];
-	}
-	// create new subject dictionary
-	NSDictionary *info = [NSDictionary dictionaryWithObject:subjects forKey:@"subjects"];
-	// write new subject dictionary to file
-	[info writeToFile:[BP_SUBJECT_FILE_PATH stringByAppendingPathComponent:BP_DEFAULT_SUBJECT_FILE_NAME] atomically:NO];
-}
-
--(void) setCurrentSubject:(NSInteger) index {
-	// if index represents a valid subject . . .
-	if(index > -1 && index < [subjects count]) {
-		currentSubject = [subjects objectAtIndex:index];
-	} else { // index not valid
-		currentSubject = nil;
-	}
 }
 
 -(void) sendCommand:(NSString *) command {
@@ -247,10 +204,6 @@
 -(void) setTargetParamater:(NSString *) newString {
 	[self performSelector:currentAction withObject:newString];
 	currentAction = nil;
-}
-
--(id) subjects {
-	return subjects;
 }
 
 -(void) startDetermination {
