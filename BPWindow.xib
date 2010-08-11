@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">9L31a</string>
+		<string key="IBDocument.SystemVersion">9L30</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
@@ -60,7 +60,6 @@
 							<string>0AD0A184-3B61-4495-B515-D20B511120CD</string>
 							<string>454F9F2E-6B43-4EEC-86C5-650BC2C5166E</string>
 							<string>88D29DE7-C663-4004-A812-59A679C05A6C</string>
-							<string>C3A51631-305C-46A8-ADB0-D06B28B80851</string>
 							<string>EE5D935A-B503-4CD5-B4FA-4BC1F99398E7</string>
 							<string>F341A4F7-4CA9-4729-9134-0171146A0D34</string>
 							<string>NSToolbarFlexibleSpaceItem</string>
@@ -124,28 +123,6 @@
 								<object class="NSCustomResource" key="NSToolbarItemImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">NSStopProgressTemplate</string>
-								</object>
-								<nil key="NSToolbarItemTarget"/>
-								<nil key="NSToolbarItemAction"/>
-								<string key="NSToolbarItemMinSize">{0, 0}</string>
-								<string key="NSToolbarItemMaxSize">{0, 0}</string>
-								<bool key="NSToolbarItemEnabled">YES</bool>
-								<bool key="NSToolbarItemAutovalidates">YES</bool>
-								<int key="NSToolbarItemTag">-1</int>
-								<bool key="NSToolbarIsUserRemovable">YES</bool>
-								<int key="NSToolbarItemVisibilityPriority">0</int>
-							</object>
-							<object class="NSToolbarItem" id="444645226">
-								<object class="NSMutableString" key="NSToolbarItemIdentifier">
-									<characters key="NS.bytes">C3A51631-305C-46A8-ADB0-D06B28B80851</characters>
-								</object>
-								<string key="NSToolbarItemLabel">View Log</string>
-								<string key="NSToolbarItemPaletteLabel">View Log</string>
-								<string key="NSToolbarItemToolTip"/>
-								<nil key="NSToolbarItemView"/>
-								<object class="NSCustomResource" key="NSToolbarItemImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">NSQuickLookTemplate</string>
 								</object>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
@@ -297,7 +274,6 @@
 						<reference ref="469546133"/>
 						<reference ref="836251248"/>
 						<reference ref="713805255"/>
-						<reference ref="444645226"/>
 						<reference ref="509188601"/>
 						<reference ref="834605583"/>
 						<reference ref="998404137"/>
@@ -308,7 +284,6 @@
 						<reference ref="902615076"/>
 						<reference ref="469546133"/>
 						<reference ref="509188601"/>
-						<reference ref="444645226"/>
 						<reference ref="834605583"/>
 						<reference ref="998404137"/>
 						<reference ref="836251248"/>
@@ -420,14 +395,14 @@
 													</object>
 												</object>
 												<object class="NSTableColumn" id="45629045">
-													<string key="NSIdentifier">id</string>
+													<string key="NSIdentifier">study</string>
 													<double key="NSWidth">1.000000e+02</double>
 													<double key="NSMinWidth">7.500000e+01</double>
 													<double key="NSMaxWidth">1.500000e+02</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
 														<int key="NSCellFlags">75628032</int>
 														<int key="NSCellFlags2">0</int>
-														<string key="NSContents">Subject</string>
+														<string key="NSContents">Study</string>
 														<reference key="NSSupport" ref="26"/>
 														<reference key="NSBackgroundColor" ref="870051223"/>
 														<reference key="NSTextColor" ref="972137914"/>
@@ -446,20 +421,20 @@
 													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="856206465"/>
 													<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
-														<string key="NSKey">id</string>
+														<string key="NSKey">study</string>
 														<bool key="NSAscending">YES</bool>
 														<string key="NSSelector">compare:</string>
 													</object>
 												</object>
 												<object class="NSTableColumn" id="360499371">
-													<string key="NSIdentifier">study</string>
+													<string key="NSIdentifier">id</string>
 													<double key="NSWidth">1.000000e+02</double>
 													<double key="NSMinWidth">7.500000e+01</double>
 													<double key="NSMaxWidth">1.500000e+02</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
 														<int key="NSCellFlags">75628032</int>
 														<int key="NSCellFlags2">0</int>
-														<string key="NSContents">Study</string>
+														<string key="NSContents">Subject</string>
 														<reference key="NSSupport" ref="26"/>
 														<object class="NSColor" key="NSBackgroundColor" id="369125655">
 															<int key="NSColorSpace">6</int>
@@ -486,7 +461,7 @@
 													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="856206465"/>
 													<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
-														<string key="NSKey">study</string>
+														<string key="NSKey">id</string>
 														<bool key="NSAscending">YES</bool>
 														<string key="NSSelector">compare:</string>
 													</object>
@@ -870,7 +845,7 @@
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
 							<string key="NSFrame">{{18, 170}, {583, 20}}</string>
 							<reference key="NSSuperview" ref="77606866"/>
-							<int key="NSpiFlags">16394</int>
+							<int key="NSpiFlags">24586</int>
 							<double key="NSMinValue">2.000000e+01</double>
 							<double key="NSMaxValue">1.000000e+02</double>
 						</object>
@@ -898,14 +873,6 @@
 						<reference key="destination" ref="616618275"/>
 					</object>
 					<int key="connectionID">63</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">cancelNIBPDetermination:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="713805255"/>
-					</object>
-					<int key="connectionID">84</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -964,20 +931,52 @@
 					<int key="connectionID">172</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleLogView:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="444645226"/>
-					</object>
-					<int key="connectionID">174</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">window</string>
 						<reference key="source" ref="729052884"/>
 						<reference key="destination" ref="542995262"/>
 					</object>
 					<int key="connectionID">175</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="616618275"/>
+						<reference key="destination" ref="729052884"/>
+					</object>
+					<int key="connectionID">176</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">logView</string>
+						<reference key="source" ref="729052884"/>
+						<reference key="destination" ref="1060207471"/>
+					</object>
+					<int key="connectionID">177</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">indicator</string>
+						<reference key="source" ref="729052884"/>
+						<reference key="destination" ref="460784858"/>
+					</object>
+					<int key="connectionID">178</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">clearSubjects:</string>
+						<reference key="source" ref="729052884"/>
+						<reference key="destination" ref="469546133"/>
+					</object>
+					<int key="connectionID">180</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">cancelNIBPDetermination:</string>
+						<reference key="source" ref="729052884"/>
+						<reference key="destination" ref="713805255"/>
+					</object>
+					<int key="connectionID">181</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1174,7 +1173,6 @@
 							<reference ref="836251248"/>
 							<reference ref="713805255"/>
 							<reference ref="469546133"/>
-							<reference ref="444645226"/>
 						</object>
 						<reference key="parent" ref="542995262"/>
 					</object>
@@ -1223,11 +1221,6 @@
 						<reference key="object" ref="460784858"/>
 						<reference key="parent" ref="77606866"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">173</int>
-						<reference key="object" ref="444645226"/>
-						<reference key="parent" ref="956254816"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1244,7 +1237,6 @@
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
-					<string>173.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
 					<string>22.IBPluginDependency</string>
@@ -1292,9 +1284,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{235, 203}, {619, 456}}</string>
-					<string>{{235, 203}, {619, 456}}</string>
+					<string>{{559, 359}, {619, 456}}</string>
+					<string>{{559, 359}, {619, 456}}</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1303,7 +1294,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{36, 655}, {617, 0}}</string>
+					<string>{{560, 815}, {617, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1335,7 +1326,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">175</int>
+			<int key="maxID">181</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1350,10 +1341,10 @@
 							<string>addNewSubject:</string>
 							<string>beginNIBPDetermination:</string>
 							<string>cancelNIBPDetermination:</string>
+							<string>clearSubjects:</string>
 							<string>dinamapDidBeginDataCollection:</string>
 							<string>dinamapDidFinishDataCollection:</string>
 							<string>removeSelectedSubject:</string>
-							<string>toggleLogView:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1372,6 +1363,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>dinamap</string>
+							<string>indicator</string>
 							<string>logView</string>
 							<string>startButton</string>
 							<string>subjectTable</string>
@@ -1381,6 +1373,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
 							<string>TKBPController</string>
+							<string>NSProgressIndicator</string>
 							<string>NSTextView</string>
 							<string>NSButton</string>
 							<string>NSTableView</string>

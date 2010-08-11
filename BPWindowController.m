@@ -22,6 +22,9 @@
 	[subjectTable reloadData];
 	// make window key
 	[window makeKeyAndOrderFront:self];
+	
+	// reset log view
+	[logView setString:@""];
 }
 
 -(void) dealloc {
@@ -38,39 +41,90 @@
 	[subjectTable editColumn:0 row:([subjects count]-1) withEvent:nil select:YES];
 }
 -(IBAction) beginNIBPDetermination:(id) sender {
-	// set current subject and study in dinamap
+	// initialize DINAMAP BP w/ table and pref data
 	[dinamap setSubject:[[subjects objectAtIndex:[subjectTable selectedRow]] valueForKey:@"id"]];
-	[dinamap setSubject:[[subjects objectAtIndex:[subjectTable selectedRow]] valueForKey:@"study"]];
+	[dinamap setStudy:[[subjects objectAtIndex:[subjectTable selectedRow]] valueForKey:@"study"]];
+	[dinamap setDataDirectory:[[TKPreferences defaultPrefs] valueForKey:@"dataDirectory"]];
+
 	// start determination
 	[dinamap startDetermination];
-	// temporarily disable subject table
-	[subjectTable setEnabled:NO];
 }
 -(IBAction) cancelNIBPDetermination:(id) sender {
-	[dinamap cancelDetermination];
-	// re-activate subject table
-	[subjectTable setEnabled:YES];
-	
+	if(![dinamap hasDeterminationInProgress]) {
+		return; // there is nothing to do
+	} else {	// go ahead and cancel
+		[dinamap cancelDetermination];
+		// re-activate subject table
+		[subjectTable setEnabled:YES];
+		// stop animation
+		[indicator stopAnimation:self];
+		// log
+		[logView insertText:[NSString stringWithFormat:@"Cancelled determination for subject: %@-%@ . . .\n",
+							 [dinamap study],[dinamap subject]]];
+	}
 }
+-(IBAction) clearSubjects:(id) sender {
+	// run panel to ask user whether they want to clear run times or all subject info
+	NSAlert *box = [NSAlert alertWithMessageText:@"What do you want to clear?" defaultButton:@"Timestamps Only" alternateButton:@"All Subject Data" otherButton:@"Cancel" informativeTextWithFormat:@"You can clear subject timestamps or clear all subjects from memory"];
+	NSInteger response = [box runModal];
+	// select action based on response
+	switch (response) {
+		case NSAlertDefaultReturn:
+			// clear last run time from subjects
+			for(NSInteger i=0; i<[subjects count]; i++) {
+				[[subjects objectAtIndex:i] removeObjectForKey:@"last"];
+			}
+			[subjectTable reloadData];
+			break;
+		case NSAlertAlternateReturn:
+			// clear all data from subjects
+			[subjects clear];
+			[subjectTable reloadData];
+			break;
+		default:
+			// do nothing
+			break;
+	}
+}
+
+
 -(IBAction) removeSelectedSubject:(id) sender {
 	[subjects removeObjectAtIndex:[subjectTable selectedRow]];
 	[subjectTable reloadData];
 }
--(IBAction) toggleLogView:(id) sender {
-	[logView setHidden:![logView isHidden]];
-}
 
 #pragma mark DINAMAP NOTIFICATIONS
 -(void) dinamapDidBeginDataCollection:(id) sender {
-	//
+	[subjectTable setEnabled:NO];
+	[indicator startAnimation:self];
+	[logView insertText:[NSString stringWithFormat:@"Began determination for subject: %@-%@ . . .\n",
+						 [dinamap study],[dinamap subject]]];
 }
 -(void) dinamapDidFinishDataCollection:(id) sender {
-	//
+	[indicator stopAnimation:self];
+	[logView insertText:[NSString stringWithFormat:@"Finished determination for subject: %@-%@ . . .\n",
+						 [dinamap study],[dinamap subject]]];	
+	// update table
+	[[subjects objectAtIndex:[subjectTable selectedRow]] setValue:[[NSDate date] description] forKey:@"last"];
+	[subjectTable setEnabled:YES];
 }
-
+-(void) error:(NSError *) error didOccurrInComponent:(id) sender withDescription:(NSString *) desc {
+	[[NSApp delegate] alertWithMessage:desc];
+	if(sender==dinamap && [error code]==BP_ERROR_FAILED_DETERMINATION_CODE) {
+		[indicator stopAnimation:self];
+		[logView insertText:[NSString stringWithFormat:@"ERROR: Failed determination for subject: %@-%@ . . .\n",[dinamap study],[dinamap subject]]];
+		[subjectTable setEnabled:YES];
+	}
+}
+	
 #pragma mark TABLE VIEW RESPONSIBILITIES
 -(NSInteger) numberOfRowsInTableView:(NSTableView *) table {
 	return [subjects count];
+}
+-(void) tableView:(NSTableView *) table sortDescriptorsDidChange:(NSArray *) oldDescriptors {
+	NSArray *newDescriptors = [table sortDescriptors];
+	[subjects sortUsingDescriptors:newDescriptors];
+	[table reloadData];
 }
 -(void) tableView:(NSTableView *) table setObjectValue:(id) newObject forTableColumn:(NSTableColumn *) column row:(NSInteger) row {
 	[[subjects objectAtIndex:row] setValue:newObject forKey:[column identifier]];
@@ -78,12 +132,13 @@
 -(id) tableView:(NSTableView *) table objectValueForTableColumn:(NSTableColumn *) column row:(NSInteger) row {
 	return [[subjects objectAtIndex:row] valueForKey:[column identifier]];
 }
+
 #pragma mark WINDOW DELEGATE RESPONSIBILITIES
 -(BOOL) windowShouldClose:(id) sender {
 	return ![dinamap hasDeterminationInProgress];
 }
 -(void) windowWillClose:(NSNotification *) notification {
-	[subjects release];
+	[subjects writeSubjects];
 }
 
 @end

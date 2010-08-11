@@ -4,17 +4,9 @@
 <dict>
 	<key>taskName</key>
 	<string>BP</string>
-	<key>dataFileName</key>
-	<string>BP.data</string>
 	<key>dataDirectory</key>
-	<string>~/Desktop/DATA</string>
+	<string></string>
 	<key>bpSerialPortName</key>
 	<string>/dev/cu.usbserial-A600b3gB</string>
-	<key>bpShouldRecordSystolic</key>
-	<true/>
-	<key>bpShouldRecordDiastolic</key>
-	<true/>
-	<key>bpShouldRecordHeartRate</key>
-	<true/>
 </dict>
 </plist>

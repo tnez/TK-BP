@@ -47,14 +47,24 @@
 /**
  Environment
  */
-#define BP_DATA_DIRECTORY [[TKPreferences defaultPrefs] valueForKey:@"dataDirectory"]
-
-
+#define BP_DEFAULT_DATA_DIRECTORY [[TKPreferences defaultPrefs] valueForKey:@"dataDirectory"]
+#define BP_DATA_FILE_NAME [[self datafile] stringByAppendingString:@".tsv"]
+#define BP_DATA_FILE [[self dataDirectory] stringByAppendingPathComponent:BP_DATA_FILE_NAME] stringByAppendingString:@".data"]
+/**
+ Error Codes
+ */
+#define BP_ERROR_INVALID_DATA_DIRECTORY_CODE 1000
+#define BP_ERROR_INVALID_DATA_DIRECTORY_DESC @"Specified data directory is not valid"
+#define BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE 1010
+#define BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC @"Communication with Dinamap 200 has failed"
+#define BP_ERROR_FAILED_DETERMINATION_CODE 1020
+#define BP_ERROR_FAILED_DETERMINATION_DESC @"Determination has failed"
 
 
 @interface TKBPController : NSObject {
 	@private
 	SEL currentAction;								// action to be performed when we read data from serial port
+	NSString *dataDirectory;						// should be pulled from preferences but this allows flexibility
 	id delegate;											// should be whatever object will be handling data
 	BOOL determinationIsInProgress;		// 
 	NSString *determinationResponse;	//
@@ -78,6 +88,7 @@
 	NSString *targetString;
 	struct timespec myTime;						// value used in loops to wait for events	
 }
+@property (retain) NSString *dataDirectory;				// path to data directory
 @property (assign) id delegate;
 @property (nonatomic, retain) NSString *deviceName;		// full path to port i.e. /dev/cu.usbserial-A600b3gB
 @property (nonatomic, retain) NSString *diastolic;		// diastolic reading
@@ -146,6 +157,7 @@
 -(void) initPort;
 -(void) loadSubjects;
 -(NSString *) newNIBPReading;
+-(BOOL) NIBPReadingIsFinished;
 -(BOOL) NIBPReadingIsValid;
 -(NSString *) oldNIBPReading;
 -(void) performSimpleLogging;
@@ -162,7 +174,7 @@
 -(void) startPollingForValidReading;
 -(NSString *) time;
 -(NSInteger) timeCounterForReading:(NSString *) reading;
--(void) throwError:(NSInteger) errorCode;
+-(void) throwError:(NSInteger) errorCode withDescription:(NSString *) desc;
 -(void) waitForResult;
 @end
 
@@ -194,7 +206,7 @@
  @abstract Sent to delegate when an error is encounterd
  @availability Pending
  */
--(void) error:(NSError *) error didOccurrInComponent:(id) sender;
+-(void) error:(NSError *) error didOccurrInComponent:(id) sender withDescription:(NSString *) desc;
 
 /**
  @function event:didOccurrInComponent:

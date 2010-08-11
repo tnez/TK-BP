@@ -14,9 +14,11 @@
 }
 @property (retain) NSMutableArray *subjects;
 -(void) add;
+-(void) clear;
 -(NSInteger) count;
 -(NSMutableDictionary *) objectAtIndex:(NSInteger) index;
 -(void) readSubjects;
 -(void) removeObjectAtIndex:(NSInteger) index;
+-(void) sortUsingDescriptors:(NSArray *) newDescriptors;
 -(void) writeSubjects;
 @end

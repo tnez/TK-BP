@@ -15,6 +15,7 @@
 	IBOutlet NSButton *cancelButton;
 	IBOutlet NSButton *startButton;
 	IBOutlet NSTableView *subjectTable;
+	IBOutlet NSProgressIndicator *indicator;
 	IBOutlet NSTextView *logView;
 	IBOutlet NSWindow *window;
 	IBOutlet TKBPController *dinamap;
@@ -23,6 +24,7 @@
 @property (assign) IBOutlet NSButton *cancelButton;
 @property (assign) IBOutlet NSButton *startButton;
 @property (assign) IBOutlet NSTableView *subjectTable;
+IBOutlet NSProgressIndicator *indicator;
 @property (assign) IBOutlet NSTextView *logView;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet TKBPController *dinamap;
@@ -32,8 +34,9 @@
 -(IBAction) addNewSubject:(id) sender;
 -(IBAction) beginNIBPDetermination:(id) sender;
 -(IBAction) cancelNIBPDetermination:(id) sender;
+-(IBAction) clearSubjects:(id) sender;
 -(IBAction) removeSelectedSubject:(id) sender;
--(IBAction) toggleLogView:(id) sender;
+// TODO: -(IBAction) toggleLogView:(id) sender;
 
 #pragma mark DINAMAP NOTIFICATIONS
 -(void) dinamapDidBeginDataCollection:(id) sender;
@@ -41,6 +44,7 @@
 
 #pragma mark TABLE VIEW RESPONSIBILITIES
 -(NSInteger) numberOfRowsInTableView:(NSTableView *) table;
+-(void) tableView:(NSTableView *) table sortDescriptorsDidChange:(NSArray *) oldDescriptors;
 -(void) tableView:(NSTableView *) table setObjectValue:(id) newObject forTableColumn:(NSTableColumn *) column row:(NSInteger) row;
 -(id) tableView:(NSTableView *) table objectValueForTableColumn:(NSTableColumn *) column row:(NSInteger) row;
 

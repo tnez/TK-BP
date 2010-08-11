@@ -32,6 +32,13 @@
 	[subjects addObject:[NSMutableDictionary dictionaryWithObject:@"New Subject" forKey:@"name"]];
 }
 
+-(void) clear {
+	// clear each object . . . don't want to change id because it will mess up interface builder connections
+	while([subjects lastObject]) {
+		[subjects removeLastObject];
+	}
+}
+
 -(NSInteger) count {
 	return [subjects count];
 }
@@ -46,6 +53,10 @@
 
 -(void) readSubjects {
 	subjects = [[NSMutableArray arrayWithContentsOfFile:TK_SUBJECTS_DEFAULT_FILE] retain];
+}
+
+-(void) sortUsingDescriptors:(NSArray *) newDescriptors {
+	[subjects sortUsingDescriptors:newDescriptors];
 }
 
 -(void) writeSubjects {
