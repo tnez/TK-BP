@@ -8,7 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -54,6 +53,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 114}, {421, 19}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="499849323">
 								<int key="NSCellFlags">68288064</int>
@@ -85,6 +85,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 89}, {74, 17}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="1002972202">
 								<int key="NSCellFlags">68288064</int>
@@ -108,6 +109,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 25}, {96, 17}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="717958613">
 								<int key="NSCellFlags">68288064</int>
@@ -124,6 +126,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{120, 84}, {225, 22}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="401991185">
 								<int key="NSCellFlags">-1808662975</int>
@@ -152,6 +155,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{120, 20}, {225, 22}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="280244759">
 								<int key="NSCellFlags">-1804468671</int>
@@ -172,6 +176,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{341, 13}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="120583464">
 								<int key="NSCellFlags">67239424</int>
@@ -192,6 +197,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 57}, {35, 17}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="1016005421">
 								<int key="NSCellFlags">68288064</int>
@@ -212,6 +218,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{120, 52}, {225, 22}}</string>
 							<reference key="NSSuperview" ref="761010927"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="274220763">
 								<int key="NSCellFlags">-1804468671</int>
@@ -235,6 +242,7 @@
 					</object>
 					<string key="NSFrameSize">{451, 153}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -603,34 +611,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">TKBPController.h</string>
-					</object>
-				</object>
-			</object>
-			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.1+">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">TKPreferences</string>
-					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>open:</string>
-							<string>save:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">window</string>
-						<string key="NS.object.0">NSWindow</string>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBDocumentRelativeSource</string>
-						<string key="minorKey">../TKUtility/build/Release/TKUtility.framework/Headers/TKPreferences.h</string>
 					</object>
 				</object>
 			</object>

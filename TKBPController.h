@@ -54,51 +54,51 @@
  Error Codes
  */
 #define BP_ERROR_INVALID_DATA_DIRECTORY_CODE 1000
-#define BP_ERROR_INVALID_DATA_DIRECTORY_DESC @"Specified data directory is not valid"
+#define BP_ERROR_INVALID_DATA_DIRECTORY_DESC @"Specified data directory is not valid - Please update preferences"
 #define BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE 1010
-#define BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC @"Communication with Dinamap 200 has failed"
+#define BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC @"Port could not be opened"
+#define BP_ERROR_NULL_RESULTS_CODE 1015
+#define BP_ERROR_NULL_RESULTS_DESC @"The Dinamap Pro 200 not responding"
 #define BP_ERROR_FAILED_DETERMINATION_CODE 1020
 #define BP_ERROR_FAILED_DETERMINATION_DESC @"Determination has failed"
 
 
 @interface TKBPController : NSObject {
 	@private
-	SEL currentAction;								// action to be performed when we read data from serial port
-	NSString *dataDirectory;						// should be pulled from preferences but this allows flexibility
-	id delegate;											// should be whatever object will be handling data
+	SEL currentAction;					// action to be performed when we read data from serial port
+	NSString *dataDirectory;			// should be pulled from preferences but this allows flexibility
+	id delegate;						// should be whatever object will be handling data
 	BOOL determinationIsInProgress;		// 
 	NSString *determinationResponse;	//
-	NSString *deviceName;							// full path to port i.e. /dev/cu.usbserial-A600b3gB
-	NSString *diastolic;							// resolved diastolic reading
-	NSString *heartRate;							// resolved heartRate reading
-	NSString *heartRateReading;				// This value represents the entire heart rate string
-																		// returned from the machine
-	NSString *map;										// resolved mean arterial pressure
-	NSString *newNIBPReading;					// This value is used internally and represents the
-																		// value taken after a determination is started, new
-																		// and old NIBP readings will be compared to determine
-																		// when the new reading is valid
-	NSString *oldNIBPReading;					// This reading is used internally and represents the
-																		// value taken right before starting a new determination
-	AMSerialPort *port;								// Our Dinamap BP as a serial port
-	BOOL shouldBreak;									// used to terminate polling loop
-	NSString *study;									// study id for current reading
-	NSString *subject;								// subject id for current reading
-	NSString *systolic;								// resolved systolic reading
-	NSString *targetString;
-	struct timespec myTime;						// value used in loops to wait for events	
+	NSString *deviceName;				// full path to port i.e. /dev/cu.usbserial-A600b3gB
+	NSString *diastolic;				// resolved diastolic reading
+	NSString *heartRate;				// resolved heartRate reading
+	NSString *heartRateReading;			// This value represents the entire heart rate string
+										// returned from the machine
+	NSString *map;						// resolved mean arterial pressure
+	NSString *newNIBPReading;			// This value is used internally and represents the
+										// value taken after a determination is started, new
+										// and old NIBP readings will be compared to determine
+										// when the new reading is valid
+	NSString *oldNIBPReading;			// This reading is used internally and represents the
+										// value taken right before starting a new determination
+	AMSerialPort *port;					// Our Dinamap BP as a serial port
+	BOOL shouldBreak;					// used to terminate polling loop
+	NSString *study;					// study id for current reading
+	NSString *subject;					// subject id for current reading
+	NSString *systolic;					// resolved systolic reading
+	NSString *targetString;				//
+	struct timespec myTime;				// value used in loops to wait for events	
 }
 @property (retain) NSString *dataDirectory;				// path to data directory
-@property (assign) id delegate;
+@property (assign) id delegate;							//
 @property (nonatomic, retain) NSString *deviceName;		// full path to port i.e. /dev/cu.usbserial-A600b3gB
 @property (nonatomic, retain) NSString *diastolic;		// diastolic reading
 @property (nonatomic, retain) NSString *heartRate;		// heart rate reading
-@property (nonatomic, retain) NSString *map;					// map reading
-@property	(nonatomic, retain) NSString *study;				// study for current reading
-@property (nonatomic, retain) NSString *subject;			// subject for current reading
-@property (nonatomic, retain) NSString *systolic;			// systolic reading	
-
-
+@property (nonatomic, retain) NSString *map;			// map reading
+@property	(nonatomic, retain) NSString *study;		// study for current reading
+@property (nonatomic, retain) NSString *subject;		// subject for current reading
+@property (nonatomic, retain) NSString *systolic;		// systolic reading	
 
 /**
  @function startDetermination
@@ -148,7 +148,6 @@
 
 @end
 
-
 @interface TKBPController (TKDinamapBPControllerPrivate)
 -(void) awakeFromNib;
 -(void) commitResults;
@@ -171,13 +170,13 @@
 -(void) setOldNIBPReading:(NSString *) newString;
 -(void) setPort:(AMSerialPort *) newPort;
 -(void) setTargetParameter:(NSString *) newString;
+-(BOOL) shouldContinuePolling;
 -(void) startPollingForValidReading;
 -(NSString *) time;
 -(NSInteger) timeCounterForReading:(NSString *) reading;
 -(void) throwError:(NSInteger) errorCode withDescription:(NSString *) desc;
 -(void) waitForResult;
 @end
-
 
 @interface NSObject (TKDinamapBPControllerDelegate)
 
@@ -215,6 +214,5 @@
  @parameter sender The componenet seding the message
  */
 -(void) event:(NSDictionary *) eventInfo didOccurrInComponent:(id) sender;
-
 
 @end

@@ -179,14 +179,17 @@
 	if(!port) {
 		[self initPort];
 	}
-
 	if([port isOpen]) {
+		// flush any old data
+		[port flushInput:YES output:YES];
+		// send command
 		[port writeString:[self prepareStringForDinamap:command] usingEncoding:NSASCIIStringEncoding error:NULL];
+		// catch result (synchronously)
 		NSString *result = [[port readUpToChar:(char)13 usingEncoding:NSASCIIStringEncoding error:nil] retain];
 		[self performSelector:currentAction withObject:result];
 		[result release];
 	} else { // port is not open
-		[[NSApp delegate] alertWithMessage:@"Communication with BP Machine has failed"];
+		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
 	}
 }
 
@@ -240,6 +243,21 @@
 	currentAction = nil;
 }
 
+-(BOOL) shouldContinuePolling {
+	// check for errors and quit flags
+	if(shouldBreak) { return NO; }
+	if(![port isOpen]) {
+		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
+		return NO;
+	}
+	if(!newNIBPReading) {
+		[self throwError:BP_ERROR_NULL_RESULTS_CODE withDescription:BP_ERROR_NULL_RESULTS_DESC];
+		return NO;
+	}
+	// if we've made it past all those errors, check the expected case
+	return ![self NIBPReadingIsFinished];
+}
+
 -(void) startDetermination {
 	
 	// if there is already a determination in progress, exit immediately
@@ -265,7 +283,6 @@
 	[self setOldNIBPReading:@""];
 	[self setNewNIBPReading:@""];
 	[self setHeartRateReading:@""];
-	[port flushInput:YES output:YES];	// flush port to clear old data
 	
 	// get current data (we will need this to know when our data is valid)
 	currentAction = @selector(setOldNIBPReading:);
@@ -279,7 +296,7 @@
 
 -(void) startPollingForValidReading {
 	
-	// reset flags
+	// reset flags and timer
 	shouldBreak = NO;
 
 	// create a pool for new objects
@@ -290,16 +307,14 @@
 		currentAction = @selector(setNewNIBPReading:);
 		[self sendCommand:BP_READ_NIBP_STATUS];
 		sleep(BP_POLLING_FREQUENCY);
-	} while (![self NIBPReadingIsFinished] && [port isOpen] && !shouldBreak);
+	} while ([self shouldContinuePolling]);
 	
-	if([port isOpen] && !shouldBreak) {
-		// grab heart rate data
-		currentAction = @selector(setHeartRateReading:);
-		[self sendCommand:BP_READ_HEART_RATE];
-	
-		// resolve the results
-		[self commitResults];
-	}
+	// grab heart rate data
+	currentAction = @selector(setHeartRateReading:);
+	[self sendCommand:BP_READ_HEART_RATE];
+
+	// resolve the results
+	[self commitResults];
 	
 	[pollingPool drain],[pollingPool release];  // release autorelease pools
 	determinationIsInProgress = NO;				// reset determination flag
