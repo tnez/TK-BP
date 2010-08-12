@@ -63,6 +63,7 @@
 							 [dinamap study],[dinamap subject]]];
 	}
 }
+
 -(IBAction) clearSubjects:(id) sender {
 	// run panel to ask user whether they want to clear run times or all subject info
 	NSAlert *box = [NSAlert alertWithMessageText:@"What do you want to clear?" defaultButton:@"Timestamps Only" alternateButton:@"All Subject Data" otherButton:@"Cancel" informativeTextWithFormat:@"You can clear subject timestamps or clear all subjects from memory"];
@@ -86,7 +87,6 @@
 			break;
 	}
 }
-
 
 -(IBAction) removeSelectedSubject:(id) sender {
 	[subjects removeObjectAtIndex:[subjectTable selectedRow]];

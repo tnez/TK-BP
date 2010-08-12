@@ -8,5 +8,7 @@
 	<string></string>
 	<key>bpSerialPortName</key>
 	<string>/dev/cu.usbserial-A600b3gB</string>
+	<key>shouldRunOnLaunch</key>
+	<true/>
 </dict>
 </plist>

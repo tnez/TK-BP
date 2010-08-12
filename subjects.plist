@@ -4,35 +4,11 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>Travis</string>
+		<string>Demo Subject</string>
 		<key>id</key>
-		<string>007</string>
+		<string>000</string>
 		<key>study</key>
-		<string>1234</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Cassie</string>
-		<key>id</key>
-		<string>008</string>
-		<key>study</key>
-		<string>1234</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Megan</string>
-		<key>id</key>
-		<string>005</string>
-		<key>study</key>
-		<string>0011</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Ricky</string>
-		<key>id</key>
-		<string>123</string>
-		<key>study</key>
-		<string>1234</string>
+		<string>000</string>
 	</dict>
 </array>
 </plist>

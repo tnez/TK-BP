@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		400E63AA1208B6930070AACD /* preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 400E63A91208B6930070AACD /* preferences.xib */; };
+		4014545012147A20003252FD /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4014544F12147A20003252FD /* TKUtility.framework */; };
+		4014551612147A62003252FD /* TKUtility.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4014544F12147A20003252FD /* TKUtility.framework */; };
 		401D7ADB1209F657006F618F /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 401D7ACF1209F657006F618F /* AMSerialPort.m */; };
 		401D7ADC1209F657006F618F /* AMSerialPort_Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 401D7AD11209F657006F618F /* AMSerialPort_Deprecated.m */; };
 		401D7ADD1209F657006F618F /* AMSerialPortAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 401D7AD31209F657006F618F /* AMSerialPortAdditions.m */; };
@@ -22,11 +24,9 @@
 		40A07834120B084D0012A3ED /* BPAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A07833120B084D0012A3ED /* BPAppController.m */; };
 		40A07880120B375E0012A3ED /* TKBPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A0787F120B375E0012A3ED /* TKBPController.m */; };
 		40A1ED7E120CA515006A1869 /* BPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A1ED7D120CA515006A1869 /* BPWindowController.m */; };
-		40A1EE12120CB61B006A1869 /* TKUtility.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		40DBB23112124522008ACC9F /* TKSubjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBB23012124522008ACC9F /* TKSubjects.m */; };
 		40DD9B38121189300091BCB2 /* BPWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40DD9B37121189300091BCB2 /* BPWindow.xib */; };
 		40DD9B3E12119BE40091BCB2 /* subjects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DD9B3D12119BE40091BCB2 /* subjects.plist */; };
-		40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F2119D1209F8B400CA2C78 /* TKUtility.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -39,7 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				40A1EE12120CB61B006A1869 /* TKUtility.framework in CopyFiles */,
+				4014551612147A62003252FD /* TKUtility.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +54,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* BP_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BP_Prefix.pch; sourceTree = "<group>"; };
 		400E63A91208B6930070AACD /* preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = preferences.xib; sourceTree = "<group>"; };
+		4014544F12147A20003252FD /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = "../TK-Utility/build/Release/TKUtility.framework"; sourceTree = SOURCE_ROOT; };
 		401D7ACC1209F657006F618F /* AMSDKCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMSDKCompatibility.h; path = "AMSerial (Andreas Mayer)/AMSDKCompatibility.h"; sourceTree = "<group>"; };
 		401D7ACD1209F657006F618F /* AMSerialErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMSerialErrors.h; path = "AMSerial (Andreas Mayer)/AMSerialErrors.h"; sourceTree = "<group>"; };
 		401D7ACE1209F657006F618F /* AMSerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMSerialPort.h; path = "AMSerial (Andreas Mayer)/AMSerialPort.h"; sourceTree = "<group>"; };
@@ -83,7 +84,6 @@
 		40DBB23012124522008ACC9F /* TKSubjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSubjects.m; sourceTree = "<group>"; };
 		40DD9B37121189300091BCB2 /* BPWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BPWindow.xib; sourceTree = "<group>"; };
 		40DD9B3D12119BE40091BCB2 /* subjects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = subjects.plist; sourceTree = "<group>"; };
-		40F2119D1209F8B400CA2C78 /* TKUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TKUtility.framework; path = ../TKUtility/build/Release/TKUtility.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,7 +95,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				401D7AEA1209F6B0006F618F /* IOKit.framework in Frameworks */,
-				40F2119E1209F8B400CA2C78 /* TKUtility.framework in Frameworks */,
+				4014545012147A20003252FD /* TKUtility.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,10 +130,10 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4014544F12147A20003252FD /* TKUtility.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				401D7AE91209F6B0006F618F /* IOKit.framework */,
-				40F2119D1209F8B400CA2C78 /* TKUtility.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -319,6 +319,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../TKUtility/build/Release\"",
+					"\"$(SRCROOT)/../TK-Utility/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -328,6 +329,11 @@
 				GCC_PREFIX_HEADER = BP_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../TK-Utility/build/Release/TKUtility.framework/Versions/A\"",
+					"\"$(SRCROOT)/../TK-Utility/build/Release\"",
+				);
 				PRODUCT_NAME = BP;
 			};
 			name = Debug;
@@ -340,12 +346,18 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../TKUtility/build/Release\"",
+					"\"$(SRCROOT)/../TK-Utility/build/Release\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BP_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../TK-Utility/build/Release/TKUtility.framework/Versions/A\"",
+					"\"$(SRCROOT)/../TK-Utility/build/Release\"",
+				);
 				PRODUCT_NAME = BP;
 			};
 			name = Release;
