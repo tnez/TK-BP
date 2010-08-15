@@ -58,7 +58,7 @@
 #define BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE 1010
 #define BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC @"Port could not be opened"
 #define BP_ERROR_NULL_RESULTS_CODE 1015
-#define BP_ERROR_NULL_RESULTS_DESC @"The Dinamap Pro 200 not responding"
+#define BP_ERROR_NULL_RESULTS_DESC @"The Dinamap Pro 200 is not responding"
 #define BP_ERROR_FAILED_DETERMINATION_CODE 1020
 #define BP_ERROR_FAILED_DETERMINATION_DESC @"Determination has failed"
 
@@ -92,6 +92,7 @@
 }
 @property (retain) NSString *dataDirectory;				// path to data directory
 @property (assign) id delegate;							//
+@property (readonly) BOOL determinationIsInProgress;    //
 @property (nonatomic, retain) NSString *deviceName;		// full path to port i.e. /dev/cu.usbserial-A600b3gB
 @property (nonatomic, retain) NSString *diastolic;		// diastolic reading
 @property (nonatomic, retain) NSString *heartRate;		// heart rate reading

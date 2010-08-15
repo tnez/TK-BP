@@ -19,7 +19,7 @@
 	IBOutlet NSTextView *logView;
 	IBOutlet NSWindow *window;
 	IBOutlet TKBPController *dinamap;
-	TKSubjects *subjects;
+	IBOutlet TKSubjects *subjects;
 }
 @property (assign) IBOutlet NSButton *cancelButton;
 @property (assign) IBOutlet NSButton *startButton;
@@ -28,7 +28,7 @@ IBOutlet NSProgressIndicator *indicator;
 @property (assign) IBOutlet NSTextView *logView;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet TKBPController *dinamap;
-@property (retain) TKSubjects *subjects;
+@property (assign) IBOutlet TKSubjects *subjects;
 
 #pragma mark UI COMMANDS
 -(IBAction) addNewSubject:(id) sender;

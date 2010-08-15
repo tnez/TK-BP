@@ -25,7 +25,7 @@
 
 
 @implementation TKBPController
-@synthesize dataDirectory,delegate,deviceName,diastolic,heartRate,map,study,subject,systolic;
+@synthesize dataDirectory,delegate,determinationIsInProgress,deviceName,diastolic,heartRate,map,study,subject,systolic;
 
 -(void) awakeFromNib {
 
@@ -68,8 +68,6 @@
 	} else { // NIBP was not valid
 		[self throwError:BP_ERROR_FAILED_DETERMINATION_CODE withDescription:BP_ERROR_FAILED_DETERMINATION_DESC];
 	}
-	// reset determination flag
-	determinationIsInProgress = NO;
 }
 
 -(NSString *) datafile {
@@ -162,7 +160,7 @@
 	NSString *dataString = [[NSString stringWithFormat:@"%@\t%@\n%@\t%@\t%@\t%@\n\n",
 							 [self datafile],[self time],heartRate,systolic,diastolic,map] retain];
 
-	[[TKLogging mainLogger] writeToDirectory:dataDirectory file:BP_DATA_FILE_NAME contentsOfString:dataString overWriteOnFirstWrite:NO];
+	[[TKLogging mainLogger] writeToDirectory:[dataDirectory stringByStandardizingPath] file:BP_DATA_FILE_NAME contentsOfString:dataString overWriteOnFirstWrite:NO];
 	[dataString autorelease];
 }
 
@@ -309,12 +307,14 @@
 		sleep(BP_POLLING_FREQUENCY);
 	} while ([self shouldContinuePolling]);
 	
-	// grab heart rate data
-	currentAction = @selector(setHeartRateReading:);
-	[self sendCommand:BP_READ_HEART_RATE];
+    if(!shouldBreak) { // if we did not force quit the determination
+        // grab heart rate data
+        currentAction = @selector(setHeartRateReading:);
+        [self sendCommand:BP_READ_HEART_RATE];
 
-	// resolve the results
-	[self commitResults];
+        // resolve the results
+        [self commitResults];
+    }
 	
 	[pollingPool drain],[pollingPool release];  // release autorelease pools
 	determinationIsInProgress = NO;				// reset determination flag

@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>BP_APP</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.rrf.${PRODUCT_NAME:identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -24,5 +24,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.5.0</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright 2010 Resedential Research Facility, University of Kentucky. All rights reserved.</string>
 </dict>
 </plist>

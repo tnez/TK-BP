@@ -7,6 +7,7 @@
 //
 #import <Cocoa/Cocoa.h>
 #import <TKUtility/TKUtility.h>
+#import "BPWindowController.h"
 #import "TKBPController.h"
 #define BP_PORT [[TKPreferences defaultPrefs] valueForKey:@"bpSerialPortName"]
 #define BP_WINDOW_NIB_FILE @"BPWindow"
@@ -16,12 +17,26 @@
 #define DATA_FILE_NAME [[TKPreferences defaultPrefs] valueForKey:@"dataFileName"]
 #define SHOULD_RUN_ON_LAUNCH [[TKPreferences defaultPrefs] valueForKey:@"shouldRunOnLaunch"]
 @interface BPAppController : NSObject {
+    IBOutlet BPWindowController *windowController;
+    IBOutlet TKBPController *machine;
 }
+@property (assign) IBOutlet BPWindowController *windowController;
+@property (assign) IBOutlet TKBPController *machine;
+/**
+ @function addSubject
+ @abstract Add a new subject record
+ */
+-(IBAction) addSubject:(id) sender;
 /**
  @function awakeFromNib
  @abstract Take care of any thing that needs initializing
 */
 -(void) awakeFromNib;
+/**
+ @function clearData
+ @abstract Clear either all subject records or all timestamp records of subjects
+ */
+-(IBAction) clearData:(id) sender;
 /**
  @function isClearedToEndSession
  @abstract Runs a series of tests to determine if the applications is okay to quit
@@ -43,6 +58,11 @@
  @abstract Quit the application
 */ 
 -(IBAction) quit:(id) sender;
+/**
+ @function removeSubject
+ @abstract Remove the selected subject record
+ */
+-(IBAction) removeSubject:(id) sender;
 #pragma mark NSApplicationDelegate
 -(void) applicationDidFinishLaunching:(NSNotification *) aNote;
 -(NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication *) app;

@@ -18,7 +18,7 @@
 	// register for notifications from dinamap
 
 	// load subject data
-	subjects = [[TKSubjects alloc] init];
+    [subjects readSubjects];
 	[subjectTable reloadData];
 	// make window key
 	[window makeKeyAndOrderFront:self];
@@ -28,7 +28,7 @@
 }
 
 -(void) dealloc {
-	[subjects release];
+    [subjects writeSubjects];
 	[super dealloc];
 }
 

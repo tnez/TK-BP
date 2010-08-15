@@ -7,6 +7,10 @@
 //
 #import "BPAppController.h"
 @implementation BPAppController
+@synthesize windowController, machine;
+-(IBAction) addSubject:(id) sender {
+    [windowController addNewSubject:self];
+}
 -(void) alertWithMessage:(NSString *) message {
 	NSAlert *alert =[NSAlert alertWithMessageText:@"Error:" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:message];
 	[alert runModal];
@@ -14,6 +18,9 @@
 -(void) awakeFromNib {
 	// register as delegate for shared application
 	[NSApp setDelegate:self];
+}
+-(IBAction) clearData:(id) sender {
+    [windowController clearSubjects:self];
 }
 -(id) init {
 	if(self=[super init]) {
@@ -24,8 +31,12 @@
 	}
 }
 -(BOOL) isClearedToEndSession {
-	// TODO: return NO if we are currently undergoing determination
-	return YES;
+    if([machine determinationIsInProgress]) {
+        return NO;
+        return NO;
+    } else {
+        return YES;
+    }
 }
 -(IBAction) openNewBPWindow:(id) sender {
 	[NSBundle loadNibNamed:BP_WINDOW_NIB_FILE owner:self];
@@ -37,8 +48,11 @@
 	if([self isClearedToEndSession]) {
 		[NSApp terminate:self];
 	} else {
-		[self alertWithMessage:@"Waiting for data from Dinamap BP"];
+		[self alertWithMessage:@"Cannot quit application while determination is in progress"];
 	}
+}
+-(IBAction) removeSubject:(id) sender {
+    [windowController removeSelectedSubject:self];
 }
 #pragma mark NSApplicationDelegate
 -(void) applicationDidFinishLaunching:(NSNotification *) aNote {
@@ -52,7 +66,6 @@
 	if([self isClearedToEndSession]) {
 		return NSTerminateNow;
 	} else {
-		[self alertWithMessage:@"Waiting for data from Dinamap BP"];		
 		return NSTerminateCancel;
 	}
 }
