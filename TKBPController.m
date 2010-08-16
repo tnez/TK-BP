@@ -23,17 +23,15 @@
 
 #import "TKBPController.h"
 
+NSString * const TKBPControllerDidBeginDataCollectionNotification = @"TKBPControllerDidBeginDataCollection";
+NSString * const TKBPControllerDidCancelDataCollectionNotification = @"TKConrollerDidCancelDataCollection";
+NSString * const TKBPControllerDidFinishDataCollectionNotification = @"TKBPControllerDidFinishDataCollection";
+NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWillThrowError";
 
 @implementation TKBPController
 @synthesize dataDirectory,delegate,determinationIsInProgress,deviceName,diastolic,heartRate,map,study,subject,systolic;
 
 -(void) awakeFromNib {
-
-	// register for port add/remove notification
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAddPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRemovePorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];	
-	
-	// initialize port list to arm notifications	
 	[AMSerialPortList sharedPortList];
 }
 
@@ -51,10 +49,9 @@
 		[self setHeartRate:[heartRateReading substringWithRange:BP_HEART_RATE_RANGE]];
 		[self setMap:[newNIBPReading substringWithRange:BP_MAP_RANGE]];
 		[self setSystolic:[newNIBPReading substringWithRange:BP_SYSTOLIC_RANGE]];
-		// send delegate messages
-		if([delegate respondsToSelector:@selector(dinamapDidFinishDataCollection:)]) {
-			[delegate dinamapDidFinishDataCollection:self];
-		}
+
+        // post notifications and delegate messages
+        [[NSNotificationCenter defaultCenter] postNotificationName:TKBPControllerDidFinishDataCollectionNotification object:self];
 		if([delegate respondsToSelector:@selector(event:didOccurrInComponent:)]) {
 			// prepare data dictionary
 			NSDictionary *info = [[NSDictionary dictionaryWithObjectsAndKeys: diastolic, @"diastolic",
@@ -62,6 +59,7 @@
 			// send data
 			[delegate event:[info autorelease] didOccurrInComponent:self];
 		}
+        
 		// perform simple logging of data
 		[self performSimpleLogging];
 
@@ -188,12 +186,10 @@
 		NSString *result = [[port readUpToChar:(char)13 usingEncoding:NSASCIIStringEncoding error:nil] retain];
 		[self performSelector:currentAction withObject:result];
 		[result release];
-	} else { // port is not open
-        if(!shouldBreak) {
-            [self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
-        }
-        shouldBreak = YES;
-	}
+	} else { // port is not open . . .
+        // . . . so set result equal to empty string
+        [self performSelector:currentAction withObject:@""];
+    }
 }
 
 -(void) setDeterminationResponse:(NSString *) newString {
@@ -251,10 +247,12 @@
 	if(shouldBreak) {	return NO; }
 	if(![port isOpen]) {
 		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
+        shouldBreak = YES;
 		return NO;
 	}
 	if(!newNIBPReading) {
 		[self throwError:BP_ERROR_NULL_RESULTS_CODE withDescription:BP_ERROR_NULL_RESULTS_DESC];
+        shouldBreak = YES;
 		return NO;
 	}
 	// if we've made it past all those errors, check the expected case
@@ -276,10 +274,8 @@
 		return;
 	}
 	
-	// notify delegate that determination has begun
-	if([delegate respondsToSelector:@selector(dinamapDidBeginDataCollection:)]) {
-		[delegate dinamapDidBeginDataCollection:self];
-	}
+	// notififcation that determination has begun
+    [[NSNotificationCenter defaultCenter] postNotificationName:TKBPControllerDidBeginDataCollectionNotification object:self];
 	
 	// set flags and initialize values
 	determinationIsInProgress = YES, shouldBreak = NO;
@@ -299,9 +295,6 @@
 
 -(void) startPollingForValidReading {
 	
-	// reset flags and timer
-	//shouldBreak = NO; <--- this can be triggered earlier so we do not want to reset
-
 	// create a pool for new objects
 	NSAutoreleasePool *pollingPool = [[NSAutoreleasePool alloc] init];
 	
@@ -316,7 +309,6 @@
         // grab heart rate data
         currentAction = @selector(setHeartRateReading:);
         [self sendCommand:BP_READ_HEART_RATE];
-
         // resolve the results
         [self commitResults];
     }
@@ -333,10 +325,9 @@
 
 -(void) throwError:(NSInteger) errorCode withDescription:(NSString *) desc {
 	NSError *error = [[NSError errorWithDomain:@"TKDinamapBPController" code:errorCode userInfo:nil] retain];
-	if([delegate respondsToSelector:@selector(error:didOccurrInComponent:withDescription:)]) {
-		[delegate error:[error autorelease] didOccurrInComponent:self withDescription:desc];
-	}
 	NSLog(@"Domain=TKDinamapBPController Code=%d Desc=%@",errorCode,desc);
+    [[NSNotificationCenter defaultCenter] postNotificationName:TKBPControllerWillThrowErrorNotification object:self];
+    [NSApp presentError:[error autorelease]];
 }
 
 @end

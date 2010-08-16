@@ -62,7 +62,6 @@
 #define BP_ERROR_FAILED_DETERMINATION_CODE 1020
 #define BP_ERROR_FAILED_DETERMINATION_DESC @"Determination has failed"
 
-
 @interface TKBPController : NSObject {
 	@private
 	SEL currentAction;					// action to be performed when we read data from serial port
@@ -90,6 +89,7 @@
 	NSString *targetString;				//
 	struct timespec myTime;				// value used in loops to wait for events	
 }
+
 @property (retain) NSString *dataDirectory;				// path to data directory
 @property (assign) id delegate;							//
 @property (readonly) BOOL determinationIsInProgress;    //
@@ -101,50 +101,12 @@
 @property (nonatomic, retain) NSString *subject;		// subject for current reading
 @property (nonatomic, retain) NSString *systolic;		// systolic reading	
 
-/**
- @function startDetermination
- @abstract Initiates NIBP determination sequence for Dinamap BP machine on established port.
- */
 -(void) startDetermination;
-
-/**
- @function cancelDetermination
- @abstract Cancels any currently running NIBP determination sequence for Dinamap BP on established port.
- */
 -(void) cancelDetermination;
-
-/**
- @function diastolic
- @result The last recorded diastolic value or nil.
- @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
- */
 -(NSString *) diastolic;
-
-/**
- @function hasDeterminationInProgress
- @result Returns YES if a determination has been started but has not finished or cancelled
- */
 -(BOOL) hasDeterminationInProgress;
-
-/**
- @function heartRate
- @result The last recorded heartRate value or nil.
- @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
- */
 -(NSString *) heartRate;
-
-/**
- @function map
- @result The last recorded map value or nil.
- @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
- */
 -(NSString *) map;
-
-/**
- @function systolic
- @result The last recorded systolic value or nil.
- @discussion This value is only assured to be accurate immediately after receiving a 'dinamapDidFinishDataCollection' message.
- */
 -(NSString *) systolic;
 
 @end
@@ -180,40 +142,12 @@
 @end
 
 @interface NSObject (TKDinamapBPControllerDelegate)
-
-/* TODO: Change from delegate messages to notifications - this makes more sense going forward, but event / error occurences will still be passed to delegate to facilitate a chain of information handling */
-
-/**
- @function dinamapDidBeginDataCollection:
- @abstract Sent to delegate after the Dinamap BP monitor is sent the message to start NIBP determination
- */
--(void) dinamapDidBeginDataCollection:(id) sender;
-
-/**
- @function dinamapDidCancelDataCollection:
- @abstract Sent to delegate after the Dinamap BP monitor is sent the message to cancel NIBP determination, if and only if a determination is currently taking place
- */
--(void) dinamapDidCancelDataCollection:(id) sender;
-
-/**
- @function dinamapDidFinishDataCollection:
- @abstract Sent to delegate after a valid reading for NIBP has been returned
- */
--(void) dinamapDidFinishDataCollection:(id) sender;
-
-/**
- @function error:hasOccurredInComponent:
- @abstract Sent to delegate when an error is encounterd
- @availability Pending
- */
 -(void) error:(NSError *) error didOccurrInComponent:(id) sender withDescription:(NSString *) desc;
-
-/**
- @function event:didOccurrInComponent:
- @abstract Sends data to delegate when event occurs
- @parameter eventInfo NSDictionary containing systolic, diastolic and heart rate data if the previous have been set to collect
- @parameter sender The componenet seding the message
- */
 -(void) event:(NSDictionary *) eventInfo didOccurrInComponent:(id) sender;
-
 @end
+
+#pragma mark Notifcations
+extern NSString * const TKBPControllerDidBeginDataCollectionNotification;
+extern NSString * const TKBPControllerDidCancelDataCollectionNotification;
+extern NSString * const TKBPControllerDidFinishDataCollectionNotification;
+extern NSString * const TKBPControllerWillThrowErrorNotification;

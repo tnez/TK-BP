@@ -8,6 +8,7 @@
 
 #import "TKSubjects.h"
 
+NSString * const TKSubjectsDidChangeNotification = @"TKSubjectsDidChangeNotification";
 
 @implementation TKSubjects
 
@@ -15,7 +16,7 @@
 
 -(void) dealloc {
 	[self writeSubjects];
-	[subjects release];
+    [subjects release]; subjects=nil;
 	[super dealloc];
 }
 
@@ -30,6 +31,7 @@
 
 -(void) add {
 	[subjects addObject:[NSMutableDictionary dictionaryWithObject:@"New Subject" forKey:@"name"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TKSubjectsDidChangeNotification object:self];    
 }
 
 -(void) clear {
@@ -37,6 +39,14 @@
 	while([subjects lastObject]) {
 		[subjects removeLastObject];
 	}
+    [[NSNotificationCenter defaultCenter] postNotificationName:TKSubjectsDidChangeNotification object:self];    
+}
+
+-(void) clearDataForKey:(NSString *) key {
+    for(NSInteger i=0; i<[self count]; i++) {
+        [[self objectAtIndex:i] removeObjectForKey:key];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:TKSubjectsDidChangeNotification object:self];
 }
 
 -(NSInteger) count {
@@ -47,21 +57,25 @@
 	return [subjects objectAtIndex:index];
 }
 
--(void) removeObjectAtIndex:(NSInteger) index {
-	[subjects removeObjectAtIndex:index];
+-(void) removeSubjects:(NSIndexSet *) selectionSet {
+    if([selectionSet count] > 0) {    
+        [subjects removeObjectsAtIndexes:selectionSet];
+        [[NSNotificationCenter defaultCenter] postNotificationName:TKSubjectsDidChangeNotification object:self];
+    }
 }
 
 -(void) readSubjects {
-	subjects = [[NSMutableArray arrayWithContentsOfFile:TK_SUBJECTS_DEFAULT_FILE] retain];
+	[self setSubjects:[NSMutableArray arrayWithContentsOfFile:TK_SUBJECTS_DEFAULT_FILE]];
 }
 
 -(void) sortUsingDescriptors:(NSArray *) newDescriptors {
 	[subjects sortUsingDescriptors:newDescriptors];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TKSubjectsDidChangeNotification object:self];    
 }
 
 -(void) writeSubjects {
 	[subjects writeToFile:TK_SUBJECTS_DEFAULT_FILE atomically:YES];
-	[subjects release];
 }
 
 @end
+

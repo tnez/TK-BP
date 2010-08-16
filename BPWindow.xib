@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="3"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -859,72 +859,10 @@
 			<object class="NSCustomObject" id="729052884">
 				<string key="NSClassName">BPWindowController</string>
 			</object>
-			<object class="NSCustomObject" id="616618275">
-				<string key="NSClassName">TKBPController</string>
-			</object>
-			<object class="NSCustomObject" id="511947365">
-				<string key="NSClassName">TKSubjects</string>
-			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">dinamap</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="616618275"/>
-					</object>
-					<int key="connectionID">63</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">beginNIBPDetermination:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="836251248"/>
-					</object>
-					<int key="connectionID">85</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="542995262"/>
-						<reference key="destination" ref="729052884"/>
-					</object>
-					<int key="connectionID">87</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataSource</string>
-						<reference key="source" ref="856206465"/>
-						<reference key="destination" ref="729052884"/>
-					</object>
-					<int key="connectionID">168</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="856206465"/>
-						<reference key="destination" ref="729052884"/>
-					</object>
-					<int key="connectionID">169</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addNewSubject:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="326820632"/>
-					</object>
-					<int key="connectionID">170</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">removeSelectedSubject:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="902615076"/>
-					</object>
-					<int key="connectionID">171</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">subjectTable</string>
@@ -943,14 +881,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="616618275"/>
-						<reference key="destination" ref="729052884"/>
-					</object>
-					<int key="connectionID">176</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">logView</string>
 						<reference key="source" ref="729052884"/>
 						<reference key="destination" ref="1060207471"/>
@@ -966,44 +896,12 @@
 					<int key="connectionID">178</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">clearSubjects:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="469546133"/>
-					</object>
-					<int key="connectionID">180</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">cancelNIBPDetermination:</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="713805255"/>
-					</object>
-					<int key="connectionID">181</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">windowController</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="729052884"/>
 					</object>
-					<int key="connectionID">182</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">machine</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="616618275"/>
-					</object>
-					<int key="connectionID">183</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">subjects</string>
-						<reference key="source" ref="729052884"/>
-						<reference key="destination" ref="511947365"/>
-					</object>
-					<int key="connectionID">185</int>
+					<int key="connectionID">186</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1183,11 +1081,6 @@
 						<reference key="parent" ref="1002"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">39</int>
-						<reference key="object" ref="616618275"/>
-						<reference key="parent" ref="1002"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">66</int>
 						<reference key="object" ref="956254816"/>
 						<object class="NSMutableArray" key="children">
@@ -1248,11 +1141,6 @@
 						<reference key="object" ref="460784858"/>
 						<reference key="parent" ref="77606866"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">184</int>
-						<reference key="object" ref="511947365"/>
-						<reference key="parent" ref="1002"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1269,7 +1157,6 @@
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
-					<string>184.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
 					<string>22.IBPluginDependency</string>
@@ -1284,7 +1171,6 @@
 					<string>36.IBPluginDependency</string>
 					<string>37.IBPluginDependency</string>
 					<string>38.IBPluginDependency</string>
-					<string>39.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>66.IBEditorWindowLastContentRect</string>
@@ -1317,7 +1203,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{549, 344}, {619, 456}}</string>
 					<string>{{549, 344}, {619, 456}}</string>
 					<boolean value="YES"/>
@@ -1327,8 +1212,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{560, 815}, {617, 0}}</string>
+					<string>{{550, 800}, {617, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1360,7 +1244,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">185</int>
+			<int key="maxID">186</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1373,14 +1257,22 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addSubject:</string>
-							<string>clearData:</string>
+							<string>cancelBP:</string>
+							<string>cancelTemp:</string>
+							<string>clearSubjectData:</string>
 							<string>openNewBPWindow:</string>
 							<string>openPreferences:</string>
 							<string>quit:</string>
 							<string>removeSubject:</string>
+							<string>startBP:</string>
+							<string>startTemp:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1394,11 +1286,13 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>machine</string>
+							<string>subjects</string>
 							<string>windowController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>TKBPController</string>
+							<string>TKSubjects</string>
 							<string>BPWindowController</string>
 						</object>
 					</object>
@@ -1410,51 +1304,24 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">BPWindowController</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addNewSubject:</string>
-							<string>beginNIBPDetermination:</string>
-							<string>cancelNIBPDetermination:</string>
-							<string>clearSubjects:</string>
-							<string>dinamapDidBeginDataCollection:</string>
-							<string>dinamapDidFinishDataCollection:</string>
-							<string>removeSelectedSubject:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
-							<string>dinamap</string>
 							<string>indicator</string>
 							<string>logView</string>
 							<string>startButton</string>
 							<string>subjectTable</string>
-							<string>subjects</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
-							<string>TKBPController</string>
 							<string>NSProgressIndicator</string>
 							<string>NSTextView</string>
 							<string>NSButton</string>
 							<string>NSTableView</string>
-							<string>TKSubjects</string>
 							<string>NSWindow</string>
 						</object>
 					</object>
@@ -1472,21 +1339,6 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>dinamapDidBeginDataCollection:</string>
-							<string>dinamapDidCancelDataCollection:</string>
-							<string>dinamapDidFinishDataCollection:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="915575128">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">TKBPController.h</string>

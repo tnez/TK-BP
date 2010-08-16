@@ -15,10 +15,15 @@
 @property (retain) NSMutableArray *subjects;
 -(void) add;
 -(void) clear;
+-(void) clearDataForKey:(NSString *) key;
 -(NSInteger) count;
 -(NSMutableDictionary *) objectAtIndex:(NSInteger) index;
 -(void) readSubjects;
--(void) removeObjectAtIndex:(NSInteger) index;
+-(void) removeSubjects:(NSIndexSet *) index;
 -(void) sortUsingDescriptors:(NSArray *) newDescriptors;
 -(void) writeSubjects;
+
 @end
+
+#pragma mark Notifications
+extern NSString * const TKSubjectsDidChangeNotification;
