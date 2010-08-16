@@ -5,9 +5,9 @@
 	<key>taskName</key>
 	<string>BP</string>
 	<key>dataDirectory</key>
-	<string></string>
+	<string>~/Desktop</string>
 	<key>bpSerialPortName</key>
-	<string>/dev/cu.usbserial-A600b3gB</string>
+	<string>terminal ls /dev for device name</string>
 	<key>shouldRunOnLaunch</key>
 	<true/>
 </dict>
