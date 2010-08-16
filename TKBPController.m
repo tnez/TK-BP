@@ -174,8 +174,7 @@
 }
 
 -(void) sendCommand:(NSString *) command {
-	// check that break flag is not raised
-	if(shouldBreak) { return; }
+
 	// open port if it does not exist
 	if(!port) {
 		[self initPort];
@@ -190,8 +189,10 @@
 		[self performSelector:currentAction withObject:result];
 		[result release];
 	} else { // port is not open
-		shouldBreak = YES; // stop future requests
-		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
+        if(!shouldBreak) {
+            [self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
+        }
+        shouldBreak = YES;
 	}
 }
 
