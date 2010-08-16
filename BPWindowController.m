@@ -110,7 +110,7 @@
 }
 -(void) error:(NSError *) error didOccurrInComponent:(id) sender withDescription:(NSString *) desc {
 	[[NSApp delegate] alertWithMessage:desc];
-	if(sender==dinamap && [error code]==BP_ERROR_FAILED_DETERMINATION_CODE) {
+	if(sender==dinamap) {
 		[indicator stopAnimation:self];
 		[logView insertText:[NSString stringWithFormat:@"ERROR: Failed determination for subject: %@-%@ . . .\n",[dinamap study],[dinamap subject]]];
 		[subjectTable setEnabled:YES];

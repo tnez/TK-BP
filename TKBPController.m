@@ -174,10 +174,13 @@
 }
 
 -(void) sendCommand:(NSString *) command {
+	// check that break flag is not raised
+	if(shouldBreak) { return; }
+	// open port if it does not exist
 	if(!port) {
 		[self initPort];
 	}
-	if([port isOpen]) {
+	if([port isOpen]) { // when port is open, continue processing
 		// flush any old data
 		[port flushInput:YES output:YES];
 		// send command
@@ -187,6 +190,7 @@
 		[self performSelector:currentAction withObject:result];
 		[result release];
 	} else { // port is not open
+		shouldBreak = YES; // stop future requests
 		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
 	}
 }
@@ -243,7 +247,7 @@
 
 -(BOOL) shouldContinuePolling {
 	// check for errors and quit flags
-	if(shouldBreak) { return NO; }
+	if(shouldBreak) {	return NO; }
 	if(![port isOpen]) {
 		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
 		return NO;
@@ -295,7 +299,7 @@
 -(void) startPollingForValidReading {
 	
 	// reset flags and timer
-	shouldBreak = NO;
+	//shouldBreak = NO; <--- this can be triggered earlier so we do not want to reset
 
 	// create a pool for new objects
 	NSAutoreleasePool *pollingPool = [[NSAutoreleasePool alloc] init];
