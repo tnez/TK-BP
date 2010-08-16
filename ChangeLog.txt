@@ -1,0 +1,3 @@
+BP v1.1 (20100816)
+==================================================
+- fixed bug where cancel command was not sent to device
