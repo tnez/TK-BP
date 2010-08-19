@@ -10,7 +10,7 @@
 
 
 @implementation BPWindowController
-@synthesize delegate,subjects,cancelButton,startButton,subjectTable,indicator,logView,window;
+@synthesize delegate,cancelButton,startButton,subjectTable,indicator,logView,window;
 
 -(void) awakeFromNib {
     // register for notifications
@@ -19,14 +19,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TKBPControllerDidCancelDataCollection:) name:TKBPControllerDidCancelDataCollectionNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TKBPControllerDidFinishDataCollection:) name:TKBPControllerDidFinishDataCollectionNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TKBPControllerWillThrowError:) name:TKBPControllerWillThrowErrorNotification object:nil];
-	// make window key
-	[window makeKeyAndOrderFront:self];
+    // make window key
+    [window makeKeyAndOrderFront:self];
+    // set data source for subject table
+    [subjectTable setDataSource:[delegate subjects]];
 }
 
 -(void) dealloc {
     // de-register notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
+    [super dealloc];
 }
 
 #pragma mark BP CONTROLLER EVENT RESPONSES
@@ -52,27 +54,5 @@
     [subjectTable reloadData];
 }
 
-#pragma mark TABLE VIEW
--(NSInteger) numberOfRowsInTableView:(NSTableView *) table {
-	return [subjects count];
-}
--(void) tableView:(NSTableView *) table sortDescriptorsDidChange:(NSArray *) oldDescriptors {
-	NSArray *newDescriptors = [table sortDescriptors];
-	[subjects sortUsingDescriptors:newDescriptors];
-}
--(void) tableView:(NSTableView *) table setObjectValue:(id) newObject forTableColumn:(NSTableColumn *) column row:(NSInteger) row {
-	[[subjects objectAtIndex:row] setValue:newObject forKey:[column identifier]];
-}
--(id) tableView:(NSTableView *) table objectValueForTableColumn:(NSTableColumn *) column row:(NSInteger) row {
-	return [[subjects objectAtIndex:row] valueForKey:[column identifier]];
-}
-
-#pragma mark WINDOW DELEGATE RESPONSIBILITIES
--(BOOL) windowShouldClose:(id) sender {
-	return [delegate isClearedToEndSession];
-}
--(void) windowWillClose:(NSNotification *) notification {
-    [delegate quit:self];
-}
 
 @end

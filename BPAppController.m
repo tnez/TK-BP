@@ -17,12 +17,10 @@
 }
 
 -(void) applicationDidFinishLaunching:(NSNotification *) aNote {
-    // set device name for machine
-    [machine setDeviceName:[[TKPreferences defaultPrefs] valueForKey:@"bpSerialPortName"]];
-    // load subject data
-    [subjects readSubjects];
-    // bring focus to front
-    [NSApp makeKeyAndOrderFront:self];
+    // configure bp machine
+    [self loadPreferences:nil];
+    // load subjects
+    subjects = [[TKSubjects alloc] init];
     // open bp window
     [self openNewBPWindow:self];
 }
@@ -40,23 +38,41 @@
     [subjects writeSubjects];
 }
 
+-(void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
+}
+
 -(id) init {
     if(self=[super init]) {
         [NSApp setDelegate:self];
-        subjects = [[TKSubjects alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadPreferences:) name:TKPreferencesDidChangeNotification object:nil];
         return self;
     }
     return nil;
 }
 
 -(BOOL) isClearedToEndSession {
-    if([machine determinationIsInProgress]) {
+    if([machine hasDeterminationInProgress]) {
         return NO;
     } else {
         return YES;
     }
 }
 
+-(void) loadPreferences:(NSNotification *) aNote {
+    [machine setDataDirectory:[[TKPreferences defaultPrefs] valueForKey:@"dataDirectory"]];
+    [machine setDeviceName:[[TKPreferences defaultPrefs] valueForKey:TKBPDeviceNameKey]];
+    [machine setPollingFrequency:[[TKPreferences defaultPrefs] valueForKey:TKBPPollingFrequencyKey]];
+    [machine setReadingMinimumLength:[[TKPreferences defaultPrefs] valueForKey:TKBPReadingMinimumLengthKey]];
+}
+
+-(void) presentError:(NSError *) error {
+    NSString *header = [NSString stringWithFormat:@"Error #:%@",[NSNumber numberWithInt:[error code]]];
+    NSString *desc = [[error userInfo] valueForKey:@"description"];
+    [[NSAlert alertWithMessageText:header defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:desc] runModal];
+}
+    
 -(IBAction) quit:(id) sender {
 	if([self isClearedToEndSession]) {
 		[NSApp terminate:self];
@@ -76,6 +92,13 @@
 	[[TKPreferences defaultPrefs] open:self];
 }
 
+-(BOOL) windowShouldClose:(id) sender {
+    return [machine hasDeterminationInProgress];
+}
+
+-(void) windowWillClose:(NSNotification *) aNote {
+    [self quit:self];
+}
 
 #pragma mark Readings
 
@@ -88,12 +111,14 @@
         // set current info and begin
         [machine setStudy:[currentSubject valueForKey:@"study"]];
         [machine setSubject:[currentSubject valueForKey:@"id"]];
+        // issue command to bp machine
+        [machine startDetermination];
     } else {
         [self alertWithMessage:@"Must select one (and only one subject) before a determination can be started"];
     }
 }
 
--(IBAction) cancel:(id) sender { // TODO: implement
+-(IBAction) cancel:(id) sender {
     if([machine hasDeterminationInProgress]) {
         [machine cancelDetermination];
     }
@@ -103,6 +128,8 @@
 
 -(IBAction) addSubject:(id) sender {
     [subjects add];
+    [[windowController subjectTable] selectRow:[subjects count]-1 byExtendingSelection:NO];
+    [[windowController subjectTable] editColumn:0 row:[[windowController subjectTable] selectedRow] withEvent:nil select:YES];
 }
 
 -(IBAction) clearSubjectData:(id) sender {

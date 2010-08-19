@@ -7,14 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "TKSubjects.h"
 #import "TKBPController.h"
-//#import "BPAppController.h"
+#import "TKSubjects.h"
 @class BPAppController;
+
 
 @interface BPWindowController : NSObject {
     IBOutlet id delegate;
-    IBOutlet TKSubjects *subjects;
 	IBOutlet NSProgressIndicator *indicator;
 	IBOutlet NSTableView *subjectTable;
 	IBOutlet NSTextView *logView;
@@ -24,7 +23,6 @@
 }
 
 @property (assign) IBOutlet id delegate;
-@property (assign) IBOutlet TKSubjects *subjects;
 @property (assign) IBOutlet NSToolbarItem *cancelButton;
 @property (assign) IBOutlet NSToolbarItem *startButton;
 @property (assign) IBOutlet NSTableView *subjectTable;
@@ -40,15 +38,5 @@
 
 #pragma mark SUBJECT EVENT RESPONSES
 -(void) TKSubjectsDidChange:(NSNotification *) aNote;
-
-#pragma mark TABLE VIEW
--(NSInteger) numberOfRowsInTableView:(NSTableView *) table;
--(void) tableView:(NSTableView *) table sortDescriptorsDidChange:(NSArray *) oldDescriptors;
--(void) tableView:(NSTableView *) table setObjectValue:(id) newObject forTableColumn:(NSTableColumn *) column row:(NSInteger) row;
--(id) tableView:(NSTableView *) table objectValueForTableColumn:(NSTableColumn *) column row:(NSInteger) row;
-
-#pragma mark WINDOW DELEGATE EVENT RESPONSES
--(BOOL) windowShouldClose:(id) sender;
--(void) windowWillClose:(NSNotification *) notification;
 
 @end

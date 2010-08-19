@@ -23,21 +23,21 @@
 
 #import "TKBPController.h"
 
-NSString * const TKBPControllerDidBeginDataCollectionNotification = @"TKBPControllerDidBeginDataCollection";
-NSString * const TKBPControllerDidCancelDataCollectionNotification = @"TKConrollerDidCancelDataCollection";
-NSString * const TKBPControllerDidFinishDataCollectionNotification = @"TKBPControllerDidFinishDataCollection";
-NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWillThrowError";
+
 
 @implementation TKBPController
-@synthesize dataDirectory,delegate,determinationIsInProgress,deviceName,diastolic,heartRate,map,study,subject,systolic;
+@synthesize dataDirectory,delegate,determinationIsInProgress,deviceName,diastolic,
+            heartRate,map,pollingFrequency,readingMinimumLength,study,subject,systolic;
 
 -(void) awakeFromNib {
 	[AMSerialPortList sharedPortList];
 }
 
 -(void) cancelDetermination {
-	shouldBreak = YES;
-	[self sendCommand:BP_CANCEL_DETERMINATION];
+    if(determinationIsInProgress) {
+        shouldBreak = YES;
+        [self sendCommand:BP_CANCEL_DETERMINATION];
+    }
 }
 
 -(void) commitResults {
@@ -64,7 +64,7 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 		[self performSimpleLogging];
 
 	} else { // NIBP was not valid
-		[self throwError:BP_ERROR_FAILED_DETERMINATION_CODE withDescription:BP_ERROR_FAILED_DETERMINATION_DESC];
+		[self throwError:TKBPFailedDeterminationError];
 	}
 }
 
@@ -119,7 +119,7 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 			// ...
 		} else { // an error occured while attempting to create port
 			[self setPort:nil];
-			[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
+            [self throwError:TKBPCouldNotEstablishPortError];
 		}
 	}
 }
@@ -134,7 +134,7 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 
 -(BOOL) NIBPReadingIsFinished {
 	// if strings are long enough to evaluate . . .
-	if (!([oldNIBPReading length] < BP_READING_MIN_LENGTH || [newNIBPReading length] < BP_READING_MIN_LENGTH)) {
+	if (!([oldNIBPReading length] < [readingMinimumLength integerValue] || [newNIBPReading length] < [readingMinimumLength integerValue])) {
 		NSInteger oldTime = 0;
 		NSInteger newTime = 0;
 		NSInteger status = 0;
@@ -244,14 +244,16 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 
 -(BOOL) shouldContinuePolling {
 	// check for errors and quit flags
-	if(shouldBreak) {	return NO; }
+	if(shouldBreak) {
+        return NO;
+    }
 	if(![port isOpen]) {
-		[self throwError:BP_ERROR_COULD_NOT_ESTABLISH_PORT_CODE withDescription:BP_ERROR_COULD_NOT_ESTABLISH_PORT_DESC];
+        [self throwError:TKBPCouldNotEstablishPortError];
         shouldBreak = YES;
 		return NO;
 	}
 	if(!newNIBPReading) {
-		[self throwError:BP_ERROR_NULL_RESULTS_CODE withDescription:BP_ERROR_NULL_RESULTS_DESC];
+		[self throwError:TKBPNullResultsError];
         shouldBreak = YES;
 		return NO;
 	}
@@ -269,8 +271,8 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 	// check that our datafile exists
 	BOOL exists; BOOL asDir;
 	exists = [[NSFileManager defaultManager] fileExistsAtPath:dataDirectory isDirectory:&asDir];
-	if(!exists && !asDir) {
-		[self throwError:BP_ERROR_INVALID_DATA_DIRECTORY_CODE withDescription:BP_ERROR_INVALID_DATA_DIRECTORY_DESC];
+	if(!exists || !asDir) {
+		[self throwError:TKBPInvalidDataDirectoryError];
 		return;
 	}
 	
@@ -302,7 +304,7 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 	do {
 		currentAction = @selector(setNewNIBPReading:);
 		[self sendCommand:BP_READ_NIBP_STATUS];
-		sleep(BP_POLLING_FREQUENCY);
+		sleep([pollingFrequency integerValue]);
 	} while ([self shouldContinuePolling]);
 	
     if(!shouldBreak) { // if we did not force quit the determination
@@ -323,11 +325,42 @@ NSString * const TKBPControllerWillThrowErrorNotification = @"TKBPControllerWill
 	return [formatter stringFromDate:[NSDate date]];
 }
 
--(void) throwError:(NSInteger) errorCode withDescription:(NSString *) desc {
-	NSError *error = [[NSError errorWithDomain:@"TKDinamapBPController" code:errorCode userInfo:nil] retain];
-	NSLog(@"Domain=TKDinamapBPController Code=%d Desc=%@",errorCode,desc);
+-(void) throwError:(TKBPControllerErrorCode) errorCode {
+    // create dictionary from error file
+    NSMutableDictionary *info = [[NSMutableDictionary dictionaryWithDictionary:[ERRORS valueForKey:[[NSNumber numberWithInteger:errorCode] stringValue]]] retain];
+    // expand description if expansion is supported
+    NSString *expansion;
+    if(expansion=[info valueForKey:@"stringForFormat"]) {
+        // TODO: support multiple value expansion
+        SEL val_1 = NSSelectorFromString([info valueForKey:@"var"]);
+        // expand string using format from error description
+        [info setValue:[NSString stringWithFormat:expansion,[self performSelector:val_1]] forKey:@"description"];
+    }
+    // create error
+	NSError *error = [[NSError errorWithDomain:@"TKDinamapBPController" code:errorCode userInfo:(NSDictionary *)[info autorelease]] retain];
+    // log
+	NSLog(@"Domain=TKDinamapBPController Code=%d Desc=%@",errorCode,[info valueForKey:@"description"]);
+    // notify of intention to send error
     [[NSNotificationCenter defaultCenter] postNotificationName:TKBPControllerWillThrowErrorNotification object:self];
-    [NSApp presentError:[error autorelease]];
+    // post error to app
+    if([[NSApp delegate] respondsToSelector:@selector(presentError:)]) {
+        [[NSApp delegate] presentError:[error autorelease]];
+    } else {
+        [NSApp presentError:[error autorelease]];
+    }
 }
 
 @end
+
+
+/** Keys */
+NSString * const TKBPDeviceNameKey              = @"TKBPDeviceName";
+NSString * const TKBPPollingFrequencyKey         = @"TKPollingFrequency";
+NSString * const TKBPReadingMinimumLengthKey    = @"TKReadingMinimumLength";
+
+
+/** Notifications */
+NSString * const TKBPControllerDidBeginDataCollectionNotification   = @"TKBPControllerDidBeginDataCollection";
+NSString * const TKBPControllerDidCancelDataCollectionNotification  = @"TKConrollerDidCancelDataCollection";
+NSString * const TKBPControllerDidFinishDataCollectionNotification  = @"TKBPControllerDidFinishDataCollection";
+NSString * const TKBPControllerWillThrowErrorNotification           = @"TKBPControllerWillThrowError";

@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">9L30</string>
+		<string key="IBDocument.SystemVersion">9L31a</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
@@ -385,6 +385,9 @@
 			<object class="NSCustomObject" id="79636733">
 				<string key="NSClassName">BPAppController</string>
 			</object>
+			<object class="NSCustomObject" id="67623810">
+				<string key="NSClassName">TKBPController</string>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -412,14 +415,6 @@
 						<reference key="destination" ref="238522557"/>
 					</object>
 					<int key="connectionID">142</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performClose:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="776162233"/>
-					</object>
-					<int key="connectionID">193</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -510,30 +505,6 @@
 					<int key="connectionID">590</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addSubject:</string>
-						<reference key="source" ref="79636733"/>
-						<reference key="destination" ref="802370286"/>
-					</object>
-					<int key="connectionID">597</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">removeSubject:</string>
-						<reference key="source" ref="79636733"/>
-						<reference key="destination" ref="1065930137"/>
-					</object>
-					<int key="connectionID">598</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">clearData:</string>
-						<reference key="source" ref="79636733"/>
-						<reference key="destination" ref="870417652"/>
-					</object>
-					<int key="connectionID">599</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: windowController</string>
 						<reference key="source" ref="802370286"/>
@@ -592,6 +563,54 @@
 						</object>
 					</object>
 					<int key="connectionID">608</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addSubject:</string>
+						<reference key="source" ref="79636733"/>
+						<reference key="destination" ref="802370286"/>
+					</object>
+					<int key="connectionID">609</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeSubjects:</string>
+						<reference key="source" ref="79636733"/>
+						<reference key="destination" ref="1065930137"/>
+					</object>
+					<int key="connectionID">610</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">clearSubjectData:</string>
+						<reference key="source" ref="79636733"/>
+						<reference key="destination" ref="870417652"/>
+					</object>
+					<int key="connectionID">611</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">close:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="776162233"/>
+					</object>
+					<int key="connectionID">612</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="67623810"/>
+						<reference key="destination" ref="79636733"/>
+					</object>
+					<int key="connectionID">614</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">machine</string>
+						<reference key="source" ref="79636733"/>
+						<reference key="destination" ref="67623810"/>
+					</object>
+					<int key="connectionID">615</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -910,6 +929,11 @@
 						<reference key="object" ref="870417652"/>
 						<reference key="parent" ref="267879091"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">613</int>
+						<reference key="object" ref="67623810"/>
+						<reference key="parent" ref="1049"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -990,6 +1014,7 @@
 					<string>594.IBPluginDependency</string>
 					<string>595.IBPluginDependency</string>
 					<string>596.IBPluginDependency</string>
+					<string>613.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>73.ImportedFromIB2</string>
 					<string>79.IBPluginDependency</string>
@@ -1082,6 +1107,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
@@ -1117,7 +1143,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">608</int>
+			<int key="maxID">615</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1130,14 +1156,18 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addSubject:</string>
-							<string>clearData:</string>
+							<string>cancel:</string>
+							<string>clearSubjectData:</string>
 							<string>openNewBPWindow:</string>
 							<string>openPreferences:</string>
 							<string>quit:</string>
-							<string>removeSubject:</string>
+							<string>removeSubjects:</string>
+							<string>start:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1167,51 +1197,26 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">BPWindowController</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addNewSubject:</string>
-							<string>beginNIBPDetermination:</string>
-							<string>cancelNIBPDetermination:</string>
-							<string>clearSubjects:</string>
-							<string>dinamapDidBeginDataCollection:</string>
-							<string>dinamapDidFinishDataCollection:</string>
-							<string>removeSelectedSubject:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
-							<string>dinamap</string>
+							<string>delegate</string>
 							<string>indicator</string>
 							<string>logView</string>
 							<string>startButton</string>
 							<string>subjectTable</string>
-							<string>subjects</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>NSButton</string>
-							<string>TKBPController</string>
+							<string>NSToolbarItem</string>
+							<string>id</string>
 							<string>NSProgressIndicator</string>
 							<string>NSTextView</string>
-							<string>NSButton</string>
+							<string>NSToolbarItem</string>
 							<string>NSTableView</string>
-							<string>TKSubjects</string>
 							<string>NSWindow</string>
 						</object>
 					</object>
@@ -1229,21 +1234,6 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>dinamapDidBeginDataCollection:</string>
-							<string>dinamapDidCancelDataCollection:</string>
-							<string>dinamapDidFinishDataCollection:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="652665610">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">TKBPController.h</string>
@@ -1257,14 +1247,6 @@
 						<string key="NS.object.0">id</string>
 					</object>
 					<reference key="sourceIdentifier" ref="652665610"/>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TKSubjects</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">TKSubjects.h</string>
-					</object>
 				</object>
 			</object>
 		</object>

@@ -6,8 +6,12 @@
 	<string>BP</string>
 	<key>dataDirectory</key>
 	<string>~/Desktop</string>
-	<key>bpSerialPortName</key>
+	<key>TKBPDeviceName</key>
 	<string>terminal ls /dev for device name</string>
+	<key>TKBPPollingFrequency</key>
+	<integer>1</integer>
+	<key>TKBPReadingMinimumLength</key>
+	<integer>8</integer>
 	<key>shouldRunOnLaunch</key>
 	<true/>
 </dict>

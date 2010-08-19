@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1000</key>
+	<dict>
+		<key>description</key>
+		<string></string>
+		<key>stringForFormat</key>
+		<string>Invalid Data Directory (%@) - You can modify the data directory by editing the preferences in the Application Menu &apos;BP -&gt; Preferences&apos;</string>
+		<key>var</key>
+		<string>dataDirectory</string>
+	</dict>
+	<key>1010</key>
+	<dict>
+		<key>description</key>
+		<string></string>
+		<key>stringForFormat</key>
+		<string>Port could not be opened for: %@ - You can modify the port by editing the preferences in the Application Menu &apos;BP -&gt; Preferences&apos;</string>
+		<key>var</key>
+		<string>deviceName</string>
+	</dict>
+	<key>1015</key>
+	<dict>
+		<key>description</key>
+		<string>The device is currently not responding</string>
+	</dict>
+	<key>1020</key>
+	<dict>
+		<key>description</key>
+		<string>Determination has failed - Please check the device</string>
+	</dict>
+</dict>
+</plist>

@@ -10,5 +10,13 @@
 		<key>study</key>
 		<string>0000</string>
 	</dict>
+	<dict>
+		<key>name</key>
+		<string>Demo Subject #2</string>
+		<key>id</key>
+		<string>001</string>
+		<key>study</key>
+		<string>0000</string>
+	</dict>
 </array>
 </plist>

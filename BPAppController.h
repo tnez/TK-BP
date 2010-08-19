@@ -27,17 +27,21 @@
 
 @property (assign) IBOutlet BPWindowController *windowController;
 @property (assign) IBOutlet TKBPController *machine;
-@property (retain) IBOutlet TKSubjects *subjects;
+@property (retain) TKSubjects *subjects;
 
 #pragma mark Application
 -(void) applicationDidFinishLaunching:(NSNotification *) aNote;
 -(NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication *) app;
 -(BOOL) isClearedToEndSession;
+-(void) loadPreferences:(NSNotification *) aNote;
+-(void) presentError:(NSError *) error;
 -(IBAction) quit:(id) sender;
 
 #pragma mark Windows
 -(IBAction) openNewBPWindow:(id) sender;
 -(IBAction) openPreferences:(id) sender;
+-(BOOL) windowShouldClose:(id) sender;
+-(void) windowWillClose:(NSNotification *) aNote;
 
 #pragma mark Subjects
 -(IBAction) addSubject:(id) sender;

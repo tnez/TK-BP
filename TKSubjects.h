@@ -23,6 +23,12 @@
 -(void) sortUsingDescriptors:(NSArray *) newDescriptors;
 -(void) writeSubjects;
 
+#pragma mark Table View Data Source Protocol
+-(NSInteger) numberOfRowsInTableView:(NSTableView *) table;
+-(void) tableView:(NSTableView *) table sortDescriptorsDidChange:(NSArray *) oldDescriptors;
+-(void) tableView:(NSTableView *) table setObjectValue:(id) newObject forTableColumn:(NSTableColumn *) column row:(NSInteger) row;
+-(id) tableView:(NSTableView *) table objectValueForTableColumn:(NSTableColumn *) column row:(NSInteger) row;
+
 @end
 
 #pragma mark Notifications

@@ -21,6 +21,7 @@
 		401D7AEA1209F6B0006F618F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401D7AE91209F6B0006F618F /* IOKit.framework */; };
 		40671D871218553400E35057 /* BP_APP.icns in Resources */ = {isa = PBXBuildFile; fileRef = 40671D861218553400E35057 /* BP_APP.icns */; };
 		40684EA9121860C50049C5D4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 40684EA8121860C50049C5D4 /* Credits.rtf */; };
+		408F4B85121DB8C1001DADE3 /* TKBPController_Errors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 408F4B84121DB8C1001DADE3 /* TKBPController_Errors.plist */; };
 		40949628120A002100301695 /* preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40949627120A002100301695 /* preferences.plist */; };
 		40949631120A019B00301695 /* BPPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40949630120A019B00301695 /* BPPreferencesController.m */; };
 		40A07834120B084D0012A3ED /* BPAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A07833120B084D0012A3ED /* BPAppController.m */; };
@@ -75,6 +76,7 @@
 		401D7AE91209F6B0006F618F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		40671D861218553400E35057 /* BP_APP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BP_APP.icns; sourceTree = "<group>"; };
 		40684EA8121860C50049C5D4 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		408F4B84121DB8C1001DADE3 /* TKBPController_Errors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TKBPController_Errors.plist; sourceTree = "<group>"; };
 		40949627120A002100301695 /* preferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preferences.plist; sourceTree = "<group>"; };
 		4094962F120A019B00301695 /* BPPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesController.h; sourceTree = "<group>"; };
 		40949630120A019B00301695 /* BPPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesController.m; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				40DD9B37121189300091BCB2 /* BPWindow.xib */,
 				40DD9B3D12119BE40091BCB2 /* subjects.plist */,
 				40684EA8121860C50049C5D4 /* Credits.rtf */,
+				408F4B84121DB8C1001DADE3 /* TKBPController_Errors.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				40DD9B3E12119BE40091BCB2 /* subjects.plist in Resources */,
 				40671D871218553400E35057 /* BP_APP.icns in Resources */,
 				40684EA9121860C50049C5D4 /* Credits.rtf in Resources */,
+				408F4B85121DB8C1001DADE3 /* TKBPController_Errors.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
