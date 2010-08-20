@@ -118,6 +118,7 @@
 		if([port open]) {
 			// ...
 		} else { // an error occured while attempting to create port
+            shouldBreak = YES;
 			[self setPort:nil];
             [self throwError:TKBPCouldNotEstablishPortError];
 		}
@@ -172,6 +173,9 @@
 }
 
 -(void) sendCommand:(NSString *) command {
+    
+    // if we have already performed break, we should not be sending commands
+    if(shouldBreak) { return; }
 
 	// open port if it does not exist
 	if(!port) {
@@ -270,7 +274,7 @@
 	
 	// check that our datafile exists
 	BOOL exists; BOOL asDir;
-	exists = [[NSFileManager defaultManager] fileExistsAtPath:dataDirectory isDirectory:&asDir];
+	exists = [[NSFileManager defaultManager] fileExistsAtPath:[dataDirectory stringByStandardizingPath] isDirectory:&asDir];
 	if(!exists || !asDir) {
 		[self throwError:TKBPInvalidDataDirectoryError];
 		return;
