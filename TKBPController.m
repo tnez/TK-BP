@@ -328,14 +328,6 @@
 -(void) throwError:(TKBPControllerErrorCode) errorCode {
     // create dictionary from error file
     NSMutableDictionary *info = [[NSMutableDictionary dictionaryWithDictionary:[ERRORS valueForKey:[[NSNumber numberWithInteger:errorCode] stringValue]]] retain];
-    // expand description if expansion is supported
-    NSString *expansion;
-    if(expansion=[info valueForKey:@"stringForFormat"]) {
-        // TODO: support multiple value expansion
-        SEL val_1 = NSSelectorFromString([info valueForKey:@"var"]);
-        // expand string using format from error description
-        [info setValue:[NSString stringWithFormat:expansion,[self performSelector:val_1]] forKey:@"description"];
-    }
     // create error
 	NSError *error = [[NSError errorWithDomain:@"TKDinamapBPController" code:errorCode userInfo:(NSDictionary *)[info autorelease]] retain];
     // log

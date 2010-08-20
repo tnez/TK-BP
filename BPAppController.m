@@ -68,7 +68,7 @@
 }
 
 -(void) presentError:(NSError *) error {
-    NSString *header = [NSString stringWithFormat:@"Error #:%@",[NSNumber numberWithInt:[error code]]];
+    NSString *header = [NSString stringWithFormat:@"Error Code: %@",[NSNumber numberWithInt:[error code]]];
     NSString *desc = [[error userInfo] valueForKey:@"description"];
     [[NSAlert alertWithMessageText:header defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:desc] runModal];
 }

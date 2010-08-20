@@ -5,20 +5,12 @@
 	<key>1000</key>
 	<dict>
 		<key>description</key>
-		<string></string>
-		<key>stringForFormat</key>
-		<string>Invalid Data Directory (%@) - You can modify the data directory by editing the preferences in the Application Menu &apos;BP -&gt; Preferences&apos;</string>
-		<key>var</key>
-		<string>dataDirectory</string>
+		<string>Invalid Data Directory - You can modify the data directory in the preferences by using the application menu (BP -&gt; Preferences)</string>
 	</dict>
 	<key>1010</key>
 	<dict>
 		<key>description</key>
-		<string></string>
-		<key>stringForFormat</key>
-		<string>Port could not be opened for: %@ - You can modify the port by editing the preferences in the Application Menu &apos;BP -&gt; Preferences&apos;</string>
-		<key>var</key>
-		<string>deviceName</string>
+		<string>Invalid Device Name - You can modify the device name in the preferences by using the application menu (BP -&gt; Preferences)</string>
 	</dict>
 	<key>1015</key>
 	<dict>
