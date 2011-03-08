@@ -57,33 +57,33 @@ extern NSString * const TKBPReadingMinimumLengthKey;
 
 @interface TKBPController : NSObject {
 	@private
-	SEL currentAction;					// action to be performed when we read data from serial port
-	NSString *dataDirectory;			// should be pulled from preferences but this allows flexibility
-	id delegate;						// should be whatever object will be handling data
+	SEL currentAction;                // action to be performed when we read data from serial port
+	NSString *dataDirectory;          // should be pulled from preferences but this allows flexibility
+	id delegate;                      // should be whatever object will be handling data
 	BOOL determinationIsInProgress;		// 
 	NSString *determinationResponse;	//
-	NSString *deviceName;				// full path to port i.e. /dev/cu.usbserial-A600b3gB
-	NSString *diastolic;				// resolved diastolic reading
-	NSString *heartRate;				// resolved heartRate reading
-	NSString *heartRateReading;			// This value represents the entire heart rate string
-										// returned from the machine
-	NSString *map;						// resolved mean arterial pressure
-	NSString *newNIBPReading;			// This value is used internally and represents the
-										// value taken after a determination is started, new
-										// and old NIBP readings will be compared to determine
-										// when the new reading is valid
-	NSString *oldNIBPReading;			// This reading is used internally and represents the
-										// value taken right before starting a new determination
-    NSNumber *pollingFrequency;         // frequency in seconds with which to poll for valid reading
-	AMSerialPort *port;					// Our Dinamap BP as a serial port
-    NSNumber *readingMinimumLength;     // used to decide what the minimum length is to begin evaluating
-                                        // a reading
-	BOOL shouldBreak;					// used to terminate polling loop
-	NSString *study;					// study id for current reading
-	NSString *subject;					// subject id for current reading
-	NSString *systolic;					// resolved systolic reading
-	NSString *targetString;				//
-	struct timespec myTime;				// value used in loops to wait for events	
+	NSString *deviceName;             // full path to port i.e. /dev/cu.usbserial-A600b3gB
+	NSString *diastolic;              // resolved diastolic reading
+	NSString *heartRate;              // resolved heartRate reading
+	NSString *heartRateReading;       // This value represents the entire heart rate string
+                                    // returned from the machine
+	NSString *map;                    // resolved mean arterial pressure
+	NSString *newNIBPReading;         // This value is used internally and represents the
+                                    // value taken after a determination is started, new
+                                    // and old NIBP readings will be compared to determine
+                                    // when the new reading is valid
+	NSString *oldNIBPReading;         // This reading is used internally and represents the
+                                    // value taken right before starting a new determination
+    NSNumber *pollingFrequency;     // frequency in seconds with which to poll for valid reading
+	AMSerialPort *port;               // Our Dinamap BP as a serial port
+    NSNumber *readingMinimumLength; // used to decide what the minimum length is to begin evaluating
+                                    // a reading
+	BOOL shouldBreak;                 // used to terminate polling loop
+	NSString *study;                  // study id for current reading
+	NSString *subject;                // subject id for current reading
+	NSString *systolic;               // resolved systolic reading
+	NSString *targetString;           //
+	struct timespec myTime;           // value used in loops to wait for events	
 }
 
 @property (retain) NSString *dataDirectory;                     // path to data directory
@@ -141,7 +141,7 @@ typedef enum TKBPControllerErrorCode {
 -(void) setPort:(AMSerialPort *) newPort;
 -(void) setTargetParameter:(NSString *) newString;
 -(BOOL) shouldContinuePolling;
--(void) startPollingForValidReading;
+-(void) startPollingForValidReading: (id)anObject;
 -(NSString *) time;
 -(NSInteger) timeCounterForReading:(NSString *) reading;
 -(void) throwError:(TKBPControllerErrorCode) errorCode;

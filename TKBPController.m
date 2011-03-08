@@ -296,10 +296,10 @@
 	// start the determination process
 	currentAction=@selector(setDeterminationResponse:);
 	[self sendCommand:BP_START_DETERMINATION];
-	[NSThread detachNewThreadSelector:@selector(startPollingForValidReading) toTarget:self withObject:self];
+	[NSThread detachNewThreadSelector:@selector(startPollingForValidReading:) toTarget:self withObject:self];
 }
 
--(void) startPollingForValidReading {
+-(void) startPollingForValidReading: (id)anObject {
 	
 	// create a pool for new objects
 	NSAutoreleasePool *pollingPool = [[NSAutoreleasePool alloc] init];
@@ -319,7 +319,7 @@
         [self commitResults];
     }
 	
-	[pollingPool drain],[pollingPool release];  // release autorelease pools
+	[pollingPool drain];
 	determinationIsInProgress = NO;				// reset determination flag
 }
 
